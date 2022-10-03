@@ -10,6 +10,7 @@ namespace Clases
 {
     public class Materia
     {
+        //TODO no se
         private string? _nombre;
         private string? _correlativa;
         private eCuatrimestre _cuatrimestre;
