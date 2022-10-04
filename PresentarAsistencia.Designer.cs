@@ -41,8 +41,10 @@
             // 
             // btnAceptar
             // 
-            this.btnAceptar.BackColor = System.Drawing.SystemColors.Window;
+            this.btnAceptar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnAceptar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptar.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnAceptar.Location = new System.Drawing.Point(189, 194);
             this.btnAceptar.Name = "btnAceptar";
             this.btnAceptar.Size = new System.Drawing.Size(96, 25);
@@ -93,8 +95,10 @@
             // 
             // btnMostrarMaterias
             // 
-            this.btnMostrarMaterias.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarMaterias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnMostrarMaterias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMostrarMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarMaterias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnMostrarMaterias.Location = new System.Drawing.Point(189, 117);
             this.btnMostrarMaterias.Name = "btnMostrarMaterias";
             this.btnMostrarMaterias.Size = new System.Drawing.Size(96, 25);

@@ -80,5 +80,20 @@ namespace alonso_nicolas_primer_parcial_labo
                     break;
             }
         }
+
+        private void btnAceptarAca_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAceptarMat_Click(object sender, EventArgs e)
+        {
+            btnAceptarAca_Click(sender, e);
+        }
+
+        private void btnAceptarUsu_Click(object sender, EventArgs e)
+        {
+            btnAceptarAca_Click(sender, e);
+        }
     }
 }

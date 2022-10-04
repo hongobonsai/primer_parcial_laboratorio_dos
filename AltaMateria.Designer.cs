@@ -108,8 +108,10 @@
             // 
             // btnCrearMateria
             // 
-            this.btnCrearMateria.BackColor = System.Drawing.SystemColors.Window;
+            this.btnCrearMateria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.btnCrearMateria.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCrearMateria.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrearMateria.ForeColor = System.Drawing.Color.Black;
             this.btnCrearMateria.Location = new System.Drawing.Point(153, 141);
             this.btnCrearMateria.Name = "btnCrearMateria";
             this.btnCrearMateria.Size = new System.Drawing.Size(96, 25);
@@ -131,6 +133,7 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.txtNombre.Location = new System.Drawing.Point(18, 46);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.PlaceholderText = "nombre...";
@@ -156,9 +159,11 @@
             // 
             // btnMostrarMaterias
             // 
-            this.btnMostrarMaterias.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarMaterias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.btnMostrarMaterias.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMostrarMaterias.Enabled = false;
+            this.btnMostrarMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarMaterias.ForeColor = System.Drawing.Color.Black;
             this.btnMostrarMaterias.Location = new System.Drawing.Point(153, 196);
             this.btnMostrarMaterias.Name = "btnMostrarMaterias";
             this.btnMostrarMaterias.Size = new System.Drawing.Size(96, 25);
@@ -169,9 +174,11 @@
             // 
             // btnMostrarProfesores
             // 
-            this.btnMostrarProfesores.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarProfesores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(244)))), ((int)(((byte)(244)))));
             this.btnMostrarProfesores.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnMostrarProfesores.Enabled = false;
+            this.btnMostrarProfesores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarProfesores.ForeColor = System.Drawing.Color.Black;
             this.btnMostrarProfesores.Location = new System.Drawing.Point(153, 120);
             this.btnMostrarProfesores.Name = "btnMostrarProfesores";
             this.btnMostrarProfesores.Size = new System.Drawing.Size(96, 25);

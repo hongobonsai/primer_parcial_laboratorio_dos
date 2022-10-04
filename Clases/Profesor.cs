@@ -145,5 +145,34 @@ namespace Clases
                 throw(new Exception($"{ex.Message}"));
             }
         }
+        /// <summary>
+        /// Devuelve una lista con los examenes creados para la materia recibida. Los examenes y la materia deben pertenecer al profesor logueado.
+        /// </summary>
+        public List<Examen>? GetExamenesMateria(string nombreMateria)
+        {
+            List<Examen>? examenesList = new();
+            if (nombreMateria != "")
+            {
+                if (SysControl.ExistMateria(nombreMateria) == true)
+                {
+                    foreach (Examen examen in _examenes)
+                    {
+                        if(examen.Materia == nombreMateria)
+                        {
+                            examenesList.Add(examen);
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("La materia ingresada no existe.");
+                }
+            }
+            else
+            {
+                throw new Exception("Completar los campos requeridos.");
+            }
+            return examenesList;
+        }
     }
 }

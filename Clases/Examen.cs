@@ -20,5 +20,8 @@ namespace Clases
             _materia = materia;
             _fecha = fecha;
         }
+        public string Nombre { get => _nombre; set => _nombre = value; }
+        public string Materia { get => _materia; set => _materia = value; }
+        public DateTime Fecha { get => _fecha; set => _fecha = value; }
     }
 }

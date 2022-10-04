@@ -62,6 +62,7 @@
             // 
             // txtDni
             // 
+            this.txtDni.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.txtDni.Location = new System.Drawing.Point(51, 124);
             this.txtDni.Name = "txtDni";
             this.txtDni.PlaceholderText = "dni...";
@@ -91,8 +92,10 @@
             // 
             // btnMostrarMaterias
             // 
-            this.btnMostrarMaterias.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarMaterias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnMostrarMaterias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMostrarMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarMaterias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnMostrarMaterias.Location = new System.Drawing.Point(186, 229);
             this.btnMostrarMaterias.Name = "btnMostrarMaterias";
             this.btnMostrarMaterias.Size = new System.Drawing.Size(96, 25);
@@ -156,8 +159,10 @@
             // 
             // button1
             // 
-            this.button1.BackColor = System.Drawing.SystemColors.Window;
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.button1.Location = new System.Drawing.Point(186, 123);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 25);
@@ -245,6 +250,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(597, 287);

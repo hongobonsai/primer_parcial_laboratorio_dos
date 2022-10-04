@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataGridProfesor));
-            this.btnAceptarAca = new System.Windows.Forms.Button();
             this.lblCargados = new System.Windows.Forms.Label();
             this.dgvMateriasProfe = new System.Windows.Forms.DataGridView();
             this.btnVerMaterias = new System.Windows.Forms.Button();
@@ -37,23 +36,11 @@
             this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.gpbLog = new System.Windows.Forms.GroupBox();
             this.picUtn = new System.Windows.Forms.PictureBox();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriasProfe)).BeginInit();
             this.gpbLog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUtn)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnAceptarAca
-            // 
-            this.btnAceptarAca.BackColor = System.Drawing.Color.White;
-            this.btnAceptarAca.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAceptarAca.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.btnAceptarAca.Location = new System.Drawing.Point(174, 180);
-            this.btnAceptarAca.Name = "btnAceptarAca";
-            this.btnAceptarAca.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptarAca.TabIndex = 5;
-            this.btnAceptarAca.Text = "Aceptar";
-            this.btnAceptarAca.UseVisualStyleBackColor = false;
-            this.btnAceptarAca.Visible = false;
             // 
             // lblCargados
             // 
@@ -73,7 +60,7 @@
             this.dgvMateriasProfe.Location = new System.Drawing.Point(24, 53);
             this.dgvMateriasProfe.Name = "dgvMateriasProfe";
             this.dgvMateriasProfe.RowTemplate.Height = 25;
-            this.dgvMateriasProfe.Size = new System.Drawing.Size(345, 219);
+            this.dgvMateriasProfe.Size = new System.Drawing.Size(345, 230);
             this.dgvMateriasProfe.TabIndex = 3;
             // 
             // btnVerMaterias
@@ -116,30 +103,45 @@
             // gpbLog
             // 
             this.gpbLog.BackColor = System.Drawing.Color.Transparent;
+            this.gpbLog.Controls.Add(this.button1);
             this.gpbLog.Controls.Add(this.cmbMateria);
             this.gpbLog.Controls.Add(this.btnVerMaterias);
-            this.gpbLog.Controls.Add(this.btnAceptarAca);
             this.gpbLog.Controls.Add(this.lblMateria);
-            this.gpbLog.Controls.Add(this.picUtn);
             this.gpbLog.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.gpbLog.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.gpbLog.Location = new System.Drawing.Point(403, 53);
             this.gpbLog.Name = "gpbLog";
-            this.gpbLog.Size = new System.Drawing.Size(269, 219);
+            this.gpbLog.Size = new System.Drawing.Size(269, 230);
             this.gpbLog.TabIndex = 29;
             this.gpbLog.TabStop = false;
-            this.gpbLog.Text = "Ver alumnos de una materia";
+            this.gpbLog.Text = "Visualización de datos";
             // 
             // picUtn
             // 
             this.picUtn.BackColor = System.Drawing.Color.Transparent;
             this.picUtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picUtn.BackgroundImage")));
             this.picUtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picUtn.Location = new System.Drawing.Point(18, 156);
+            this.picUtn.Location = new System.Drawing.Point(260, 5);
             this.picUtn.Name = "picUtn";
             this.picUtn.Size = new System.Drawing.Size(109, 63);
             this.picUtn.TabIndex = 10;
             this.picUtn.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
+            this.button1.Location = new System.Drawing.Point(18, 174);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(231, 39);
+            this.button1.TabIndex = 29;
+            this.button1.Text = "VER MIS EXAMENES";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // DataGridProfesor
             // 
@@ -147,10 +149,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(781, 343);
+            this.ClientSize = new System.Drawing.Size(699, 305);
             this.Controls.Add(this.dgvMateriasProfe);
             this.Controls.Add(this.gpbLog);
             this.Controls.Add(this.lblCargados);
+            this.Controls.Add(this.picUtn);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -168,8 +171,6 @@
         }
 
         #endregion
-
-        private Button btnAceptarAca;
         private Label lblCargados;
         private DataGridView dgvMateriasProfe;
         private Button btnVerMaterias;
@@ -177,5 +178,6 @@
         private ComboBox cmbMateria;
         private GroupBox gpbLog;
         private PictureBox picUtn;
+        private Button button1;
     }
 }

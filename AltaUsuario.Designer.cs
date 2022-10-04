@@ -156,8 +156,10 @@
             // 
             // btnAceptarAdmin
             // 
-            this.btnAceptarAdmin.BackColor = System.Drawing.SystemColors.Window;
+            this.btnAceptarAdmin.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnAceptarAdmin.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptarAdmin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptarAdmin.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnAceptarAdmin.Location = new System.Drawing.Point(153, 141);
             this.btnAceptarAdmin.Name = "btnAceptarAdmin";
             this.btnAceptarAdmin.Size = new System.Drawing.Size(96, 25);
@@ -180,6 +182,7 @@
             // 
             // txtUser
             // 
+            this.txtUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.txtUser.Location = new System.Drawing.Point(18, 46);
             this.txtUser.Name = "txtUser";
             this.txtUser.PlaceholderText = "user...";
@@ -188,6 +191,7 @@
             // 
             // txtPass
             // 
+            this.txtPass.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.txtPass.Location = new System.Drawing.Point(18, 96);
             this.txtPass.Name = "txtPass";
             this.txtPass.PasswordChar = '*';

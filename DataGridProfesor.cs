@@ -42,9 +42,42 @@ namespace alonso_nicolas_primer_parcial_labo
 
         private void btnVerMaterias_Click(object sender, EventArgs e)
         {
+            try
+            {
+               if((SysControl.GetMateria(cmbMateria.Text)).GetAlumnosList().Count != 0)
+                {
+                    DataGridListaAlumnos listaAlumnosDvg = new(SysControl.GetMateria(cmbMateria.Text));
+                    listaAlumnosDvg.ShowDialog();
+                }
+                else
+                {
+                    throw new Exception("La materia seleccionada no tiene alumnos inscriptos.");
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-            DataGridListaAlumnos listaAlumnosDvg = new(SysControl.GetMateria(cmbMateria.Text));
-            listaAlumnosDvg.ShowDialog();
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (_profesorLogueado.GetExamenesMateria(cmbMateria.Text).Count != 0)
+                {
+                    DataGridExamenes listaExamenesDvg = new(SysControl.GetMateria(cmbMateria.Text), _profesorLogueado);
+                    listaExamenesDvg.ShowDialog();
+                }
+                else
+                {
+                    throw new Exception("La materia seleccionada no tiene examenes.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
     }
 }

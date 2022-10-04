@@ -60,8 +60,10 @@
             // 
             // btnAceptarAca
             // 
-            this.btnAceptarAca.BackColor = System.Drawing.Color.White;
+            this.btnAceptarAca.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnAceptarAca.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptarAca.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptarAca.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnAceptarAca.Location = new System.Drawing.Point(673, 303);
             this.btnAceptarAca.Name = "btnAceptarAca";
             this.btnAceptarAca.Size = new System.Drawing.Size(75, 23);
@@ -69,11 +71,14 @@
             this.btnAceptarAca.Text = "Aceptar";
             this.btnAceptarAca.UseVisualStyleBackColor = false;
             this.btnAceptarAca.Visible = false;
+            this.btnAceptarAca.Click += new System.EventHandler(this.btnAceptarAca_Click);
             // 
             // btnAceptarUsu
             // 
-            this.btnAceptarUsu.BackColor = System.Drawing.Color.White;
+            this.btnAceptarUsu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnAceptarUsu.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptarUsu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptarUsu.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnAceptarUsu.Location = new System.Drawing.Point(205, 231);
             this.btnAceptarUsu.Name = "btnAceptarUsu";
             this.btnAceptarUsu.Size = new System.Drawing.Size(75, 23);
@@ -81,11 +86,14 @@
             this.btnAceptarUsu.Text = "Aceptar";
             this.btnAceptarUsu.UseVisualStyleBackColor = false;
             this.btnAceptarUsu.Visible = false;
+            this.btnAceptarUsu.Click += new System.EventHandler(this.btnAceptarUsu_Click);
             // 
             // btnAceptarMat
             // 
-            this.btnAceptarMat.BackColor = System.Drawing.Color.White;
+            this.btnAceptarMat.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnAceptarMat.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnAceptarMat.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAceptarMat.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnAceptarMat.Location = new System.Drawing.Point(274, 231);
             this.btnAceptarMat.Name = "btnAceptarMat";
             this.btnAceptarMat.Size = new System.Drawing.Size(75, 23);
@@ -93,6 +101,7 @@
             this.btnAceptarMat.Text = "Aceptar";
             this.btnAceptarMat.UseVisualStyleBackColor = false;
             this.btnAceptarMat.Visible = false;
+            this.btnAceptarMat.Click += new System.EventHandler(this.btnAceptarMat_Click);
             // 
             // DataGrid
             // 

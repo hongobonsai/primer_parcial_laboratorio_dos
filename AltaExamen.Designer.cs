@@ -68,6 +68,7 @@
             // 
             // txtNombre
             // 
+            this.txtNombre.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.txtNombre.Location = new System.Drawing.Point(18, 46);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.PlaceholderText = "name...";
@@ -121,8 +122,10 @@
             // 
             // btnMostrarMaterias
             // 
-            this.btnMostrarMaterias.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarMaterias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnMostrarMaterias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMostrarMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarMaterias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnMostrarMaterias.Location = new System.Drawing.Point(153, 127);
             this.btnMostrarMaterias.Name = "btnMostrarMaterias";
             this.btnMostrarMaterias.Size = new System.Drawing.Size(96, 25);
@@ -142,8 +145,10 @@
             // 
             // btnCrearExamen
             // 
-            this.btnCrearExamen.BackColor = System.Drawing.SystemColors.Window;
+            this.btnCrearExamen.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnCrearExamen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCrearExamen.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnCrearExamen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnCrearExamen.Location = new System.Drawing.Point(153, 197);
             this.btnCrearExamen.Name = "btnCrearExamen";
             this.btnCrearExamen.Size = new System.Drawing.Size(96, 25);

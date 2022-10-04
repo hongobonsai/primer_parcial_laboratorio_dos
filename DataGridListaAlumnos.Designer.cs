@@ -31,23 +31,10 @@ namespace alonso_nicolas_primer_parcial_labo
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DataGridListaAlumnos));
-            this.btnAceptarAca = new System.Windows.Forms.Button();
             this.lblTitle = new System.Windows.Forms.Label();
             this.dgvAlumnos = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAlumnos)).BeginInit();
             this.SuspendLayout();
-            // 
-            // btnAceptarAca
-            // 
-            this.btnAceptarAca.BackColor = System.Drawing.Color.White;
-            this.btnAceptarAca.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnAceptarAca.Location = new System.Drawing.Point(674, 298);
-            this.btnAceptarAca.Name = "btnAceptarAca";
-            this.btnAceptarAca.Size = new System.Drawing.Size(75, 23);
-            this.btnAceptarAca.TabIndex = 5;
-            this.btnAceptarAca.Text = "Aceptar";
-            this.btnAceptarAca.UseVisualStyleBackColor = false;
-            this.btnAceptarAca.Visible = false;
             // 
             // lblTitle
             // 
@@ -76,8 +63,7 @@ namespace alonso_nicolas_primer_parcial_labo
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(754, 333);
-            this.Controls.Add(this.btnAceptarAca);
+            this.ClientSize = new System.Drawing.Size(754, 295);
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.dgvAlumnos);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -95,8 +81,6 @@ namespace alonso_nicolas_primer_parcial_labo
         }
 
         #endregion
-
-        private Button btnAceptarAca;
         private Label lblTitle;
         private DataGridView dgvAlumnos;
     }

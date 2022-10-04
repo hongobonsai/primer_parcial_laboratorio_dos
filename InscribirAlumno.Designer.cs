@@ -39,8 +39,10 @@
             // 
             // btnMostrarMaterias
             // 
-            this.btnMostrarMaterias.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarMaterias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnMostrarMaterias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMostrarMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarMaterias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(7)))), ((int)(((byte)(0)))));
             this.btnMostrarMaterias.Location = new System.Drawing.Point(191, 132);
             this.btnMostrarMaterias.Name = "btnMostrarMaterias";
             this.btnMostrarMaterias.Size = new System.Drawing.Size(96, 25);

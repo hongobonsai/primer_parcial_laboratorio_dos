@@ -20,41 +20,7 @@ namespace alonso_nicolas_primer_parcial_labo
             InitializeComponent();
             cmbTipoUsuario.DataSource = Enum.GetValues(typeof(eType));
         }
-        private void btnIngresar_Click(object sender, EventArgs e)
-        {
-            Usuario? usuarioLogueado;
 
-            try
-            {
-                usuarioLogueado = SysControl.LoginCheck(txtUsuario.Text, txtContrasenia.Text, (eType)cmbTipoUsuario.SelectedValue);
-                this.Hide();
-                //Ver clase dialog result
-                switch ((eType)cmbTipoUsuario.SelectedValue)
-                {
-                    case eType.Admin:
-                        GestionAdmin menuAdmin = new(this, (Admin?)usuarioLogueado);
-                        menuAdmin.ShowDialog();
-                        break;
-                    case eType.Profesor:
-                        GestionProfesor menuProfesor = new(this, (Profesor?)usuarioLogueado);
-                        menuProfesor.ShowDialog();
-                        break;
-                    case eType.Alumno:
-                        GestionAlumno menuAlumno = new(this, (Alumno?)usuarioLogueado);
-                        menuAlumno.ShowDialog();
-                        break;
-                    default:
-                        MessageBox.Show("Unexpected Error", "?", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                        break;
-                }
-                lblLogError.Visible = false;
-            }
-            catch(Exception ex)
-            {
-                lblLogError.Text = ex.Message;
-                lblLogError.Visible = true;
-            }
-        }
         private void btnHcAdmin_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "hongobonsai";
@@ -95,6 +61,42 @@ namespace alonso_nicolas_primer_parcial_labo
             else
             {
                 txtContrasenia.PasswordChar = '*';
+            }
+        }
+
+        private void btnIngresar_Click_1(object sender, EventArgs e)
+        {
+            Usuario? usuarioLogueado;
+
+            try
+            {
+                usuarioLogueado = SysControl.LoginCheck(txtUsuario.Text, txtContrasenia.Text, (eType)cmbTipoUsuario.SelectedValue);
+                this.Hide();
+                //Ver clase dialog result
+                switch ((eType)cmbTipoUsuario.SelectedValue)
+                {
+                    case eType.Admin:
+                        GestionAdmin menuAdmin = new(this, (Admin?)usuarioLogueado);
+                        menuAdmin.ShowDialog();
+                        break;
+                    case eType.Profesor:
+                        GestionProfesor menuProfesor = new(this, (Profesor?)usuarioLogueado);
+                        menuProfesor.ShowDialog();
+                        break;
+                    case eType.Alumno:
+                        GestionAlumno menuAlumno = new(this, (Alumno?)usuarioLogueado);
+                        menuAlumno.ShowDialog();
+                        break;
+                    default:
+                        MessageBox.Show("Unexpected Error", "?", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        break;
+                }
+                lblLogError.Visible = false;
+            }
+            catch (Exception ex)
+            {
+                lblLogError.Text = ex.Message;
+                lblLogError.Visible = true;
             }
         }
     }

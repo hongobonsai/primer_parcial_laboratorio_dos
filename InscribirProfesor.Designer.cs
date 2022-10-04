@@ -41,8 +41,10 @@
             // 
             // btnMostrarMaterias
             // 
-            this.btnMostrarMaterias.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarMaterias.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnMostrarMaterias.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMostrarMaterias.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarMaterias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMostrarMaterias.Location = new System.Drawing.Point(297, 171);
             this.btnMostrarMaterias.Name = "btnMostrarMaterias";
             this.btnMostrarMaterias.Size = new System.Drawing.Size(96, 25);
@@ -53,8 +55,10 @@
             // 
             // btnMostrarProfesores
             // 
-            this.btnMostrarProfesores.BackColor = System.Drawing.SystemColors.Window;
+            this.btnMostrarProfesores.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(239)))), ((int)(((byte)(225)))));
             this.btnMostrarProfesores.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnMostrarProfesores.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnMostrarProfesores.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.btnMostrarProfesores.Location = new System.Drawing.Point(297, 75);
             this.btnMostrarProfesores.Name = "btnMostrarProfesores";
             this.btnMostrarProfesores.Size = new System.Drawing.Size(96, 25);
