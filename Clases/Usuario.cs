@@ -7,6 +7,9 @@ using Clases.enums;
 
 namespace Clases
 {
+    /// <summary>
+    /// Clase base de los demas usuarios del sistema. Almacena datos de LOGIN.
+    /// </summary>
     public class Usuario
     {
         private string? _user;

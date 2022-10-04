@@ -15,8 +15,6 @@ namespace alonso_nicolas_primer_parcial_labo
 {
     public partial class Login : Form
     {
-        //TODO VERIFICAR QUE EL ALUMNOO SE PUEDA VOLVER A ANOTAR SI DESAPROBO.
-        //TODO verificar todos los parse int pq van a romper
         public Login()
         {
             InitializeComponent();

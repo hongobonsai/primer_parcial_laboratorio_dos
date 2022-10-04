@@ -355,11 +355,12 @@
             this.Controls.Add(this.lblTitle);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AltaUsuario";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AltaUsuario";
+            this.Text = "Dar de alta un usuario";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AltaUsuario_FormClosed);
             this.Load += new System.EventHandler(this.AltaUsuario_Load);
             this.gpbLog.ResumeLayout(false);

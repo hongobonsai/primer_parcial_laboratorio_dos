@@ -51,12 +51,12 @@
             // 
             // cmbMateria
             // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.FormattingEnabled = true;
             this.cmbMateria.Location = new System.Drawing.Point(56, 103);
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(231, 23);
             this.cmbMateria.TabIndex = 15;
-            this.cmbMateria.Text = "seleccionar materia...";
             // 
             // lblProfesor
             // 
@@ -119,9 +119,10 @@
             this.Controls.Add(this.lblProfesor);
             this.Controls.Add(this.btnMostrarMaterias);
             this.Controls.Add(this.cmbMateria);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InscribirAlumno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InscribirProfesor";
+            this.Text = "Inscripción a materia";
             this.Load += new System.EventHandler(this.InscribirAlumno_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -64,12 +64,12 @@
             // 
             // cmbMateria
             // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.FormattingEnabled = true;
             this.cmbMateria.Location = new System.Drawing.Point(28, 140);
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(231, 23);
             this.cmbMateria.TabIndex = 23;
-            this.cmbMateria.Text = "seleccionar materia...";
             // 
             // lblTitle
             // 
@@ -94,12 +94,12 @@
             // 
             // cmbRegularidad
             // 
+            this.cmbRegularidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbRegularidad.FormattingEnabled = true;
             this.cmbRegularidad.Location = new System.Drawing.Point(28, 216);
             this.cmbRegularidad.Name = "cmbRegularidad";
             this.cmbRegularidad.Size = new System.Drawing.Size(231, 23);
             this.cmbRegularidad.TabIndex = 27;
-            this.cmbRegularidad.Text = "seleccionar materia...";
             // 
             // btnAceptar
             // 
@@ -148,11 +148,12 @@
             this.Controls.Add(this.btnMostrarMaterias);
             this.Controls.Add(this.cmbMateria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "CambiarRegularidad";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CambiarRegularidad";
+            this.Text = "Cambiar la regularidad";
             this.Load += new System.EventHandler(this.CambiarRegularidad_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

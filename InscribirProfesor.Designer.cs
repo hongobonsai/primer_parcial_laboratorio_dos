@@ -65,22 +65,22 @@
             // 
             // cmbMateria
             // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.FormattingEnabled = true;
             this.cmbMateria.Location = new System.Drawing.Point(56, 172);
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(231, 23);
             this.cmbMateria.TabIndex = 15;
-            this.cmbMateria.Text = "seleccionar materia...";
             this.cmbMateria.SelectedIndexChanged += new System.EventHandler(this.cmbAgregarCorrelativa_SelectedIndexChanged);
             // 
             // cmbAgregarProfesor
             // 
+            this.cmbAgregarProfesor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAgregarProfesor.FormattingEnabled = true;
             this.cmbAgregarProfesor.Location = new System.Drawing.Point(56, 76);
             this.cmbAgregarProfesor.Name = "cmbAgregarProfesor";
             this.cmbAgregarProfesor.Size = new System.Drawing.Size(231, 23);
             this.cmbAgregarProfesor.TabIndex = 14;
-            this.cmbAgregarProfesor.Text = "seleccionar profesor...";
             // 
             // lblProfesor
             // 
@@ -146,9 +146,10 @@
             this.Controls.Add(this.btnMostrarProfesores);
             this.Controls.Add(this.cmbMateria);
             this.Controls.Add(this.cmbAgregarProfesor);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "InscribirProfesor";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "InscribirProfesor";
+            this.Text = "Asignar un profesor";
             this.Load += new System.EventHandler(this.InscribirProfesor_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

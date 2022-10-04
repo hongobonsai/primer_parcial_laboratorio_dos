@@ -1,4 +1,5 @@
-﻿using Clases;
+﻿using alonso_nicolas_primer_parcial_labo.Clases.enums;
+using Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -34,11 +35,17 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                _alumnoModificar = SysControl.GetAlumnoByDni(int.Parse(txtDni.Text));
-                _materia = _alumnoModificar.GetMateriaEnCurso(cmbMateria.Text);
-                Admin.CambiarRegularidad(_alumnoModificar, _materia, (eRegularidad)cmbRegularidad.SelectedValue);
-                MessageBox.Show($"Se cambió la regularidad de {_alumnoModificar.Nombre} {_alumnoModificar.Apellido}\nen la materia {_materia.Nombre}.");
-                this.Close();
+                if (!string.IsNullOrWhiteSpace(txtDni.Text))
+                {
+                    _alumnoModificar = SysControl.GetAlumnoByDni(int.Parse(txtDni.Text));
+                    _materia = _alumnoModificar.GetMateriaEnCurso(cmbMateria.Text);
+                    Admin.CambiarRegularidad(_alumnoModificar, _materia, (eRegularidad)cmbRegularidad.SelectedValue);
+                    MessageBox.Show($"Se cambió la regularidad de {_alumnoModificar.Nombre} {_alumnoModificar.Apellido}\nen la materia {(string)_materia}.");
+                    this.Close();
+                } else
+                {
+                    throw new Exception("Completar el dni.");
+                }
             }
             catch (Exception ex)
             {

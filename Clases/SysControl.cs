@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Clases
 {
+    /// <summary>
+    /// Clase estatica que actúa de "base de datos" del sistema. Almacena todos los datos y sus metodos permiten interactuar con los mismos.
+    /// </summary>
     public static class SysControl
     {
         static Dictionary<string, Usuario?> _usuariosDict;
@@ -17,17 +20,34 @@ namespace Clases
         {
             _usuariosDict = new Dictionary<string, Usuario?>();
             _materiasDict = new Dictionary<string, Materia?>();
-            HardcodearUsuario();
+            HardcodearDatos();
         }
-        public static void HardcodearUsuario()
+        /// <summary>
+        /// Harcodea los datos pedidos por la consigna (admin, alumnos, profesores, materias) para que el programa funcione sin necesidad de cargar usuarios ni materias.
+        /// </summary>
+        public static void HardcodearDatos()
         {
+            Materia materiaBuff;
             DateTime nacimiento = new(2000, 8, 24);
             DateTime nacimientoDos = new(1987, 12, 29);
+            DateTime nacimientoTres = new(1970, 6, 17);
+            DateTime nacimientoCuatro = new(1950, 1, 3);
+            DateTime nacimientoCinco = new(2006, 5, 10);
             _usuariosDict.Add("hongobonsai", new Admin("hongobonsai", "soyeladmin", eType.Admin));
             _usuariosDict.Add("pferrete", new Profesor("pferrete", "quelindaslasmatematicas", eType.Profesor, "Pablo", "Ferrete", 29203223, nacimiento, eGenero.Masculino));
-            _usuariosDict.Add("fcardon", new Alumno("fcardon", "meahorrolacuota", eType.Alumno, "Franco", "Cardon", 1234, nacimientoDos, eGenero.Otro));
+            _usuariosDict.Add("adeyua", new Profesor("adeyua", "adeyua", eType.Profesor, "Andrea", "Deyuanine", 18923601, nacimientoCuatro, eGenero.Femenino));
+            _usuariosDict.Add("fcardon", new Alumno("fcardon", "meahorrolacuota", eType.Alumno, "Franco", "Cardon", 43982312, nacimientoDos, eGenero.Otro));
+            _usuariosDict.Add("jorgeluis", new Alumno("jorgeluis", "jorgeluis", eType.Alumno, "Jorge", "Luis", 39842100, nacimientoTres, eGenero.Masculino));
+            _usuariosDict.Add("ayeazu", new Alumno("ayeazu", "jorgeluis", eType.Alumno, "Ayelen", "Azul", 60923812, nacimientoCinco, eGenero.Femenino));
             _materiasDict.Add("matematica", new Materia("matematica", eCuatrimestre.Primero));
+            _materiasDict.Add("spd", new Materia("spd", eCuatrimestre.Primero));
+            _materiasDict.Add("arquitectura so", new Materia("arquitectura so", eCuatrimestre.Segundo));
+            _materiasDict.TryGetValue("arquitectura so", out materiaBuff);
+            AsignarCorrelativa(materiaBuff, "spd");
         }
+        /// <summary>
+        /// Valida los datos de login de usuario recibidos por parametro. Tambien devuelve el Usuario que corresponde al user recibido.
+        /// </summary>
         public static Usuario? LoginCheck(string user, string pass, eType tipoUsuario)
         {
             Usuario? retorno = null;
@@ -62,6 +82,9 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Verifica si el user recibido corresponde al nombre de usuario de algun Usuario.
+        /// </summary>
         public static bool ExistUsuario(string user)
         {
             bool retorno = false;
@@ -71,6 +94,41 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Verifica si algún usuario ya fue ingresado con el dni recibido.
+        /// </summary>
+        /// <returns>
+        /// true si el dni ya existe, false si no existe
+        /// </returns>
+        public static bool ExistsDni(int dni)
+        {
+            bool retorno = false;
+            List<Alumno> alumnos = GetAlumnosList();
+            List<Profesor> profesores = GetProfesoresList();
+            foreach (Alumno alumno in alumnos)
+            {
+                if(alumno.Dni == dni)
+                {
+                    retorno = true;
+                    break;
+                }
+            }
+            foreach (Profesor profesor in profesores)
+            {
+                if (profesor.Dni == dni)
+                {
+                    retorno = true;
+                    break;
+                }
+            }
+            return retorno;
+        }
+        /// <summary>
+        /// Agrega un Usuario recibido por parametro al diccionario de usuarios del sistema
+        /// </summary>
+        /// <returns>
+        /// true si OK, false si ERROR
+        /// </returns>
         public static bool AgregarUsuario(Usuario usuario)
         {
             bool retorno = false;
@@ -81,6 +139,12 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Obtiene el tipo de usuario en formato "eType", correspondiente al string recibido
+        /// </summary>
+        /// <returns>
+        /// Tipo de usuario en formato "eType"
+        /// </returns>
         public static eType GetTipoUsuario(string? type)
         {
             eType retorno = eType.Alumno;
@@ -90,10 +154,16 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Devuelve un diccionario de usuarios del sistema
+        /// </summary>
         public static Dictionary<string, Usuario?> GetUsuarios()
         {
             return _usuariosDict;
         }
+        /// <summary>
+        /// Obtiene cada usuario del diccionario, los agrega a un buffer de tipo List, y devuelve una lista de usuarios del sistema
+        /// </summary>
         public static List<Usuario> GetUsuariosList()
         {
             List<Usuario> usuariosList = new();
@@ -106,6 +176,9 @@ namespace Clases
             }
             return usuariosList;
         }
+        /// <summary>
+        /// Devuelve un diccionario de admin del sistema
+        /// </summary>
         public static Dictionary<string, Usuario?> GetAdmins()
         {
             Dictionary<string, Usuario?> admins = new();
@@ -118,6 +191,9 @@ namespace Clases
             }
             return admins;
         }
+        /// <summary>
+        /// Obtiene cada admin del diccionario, los agrega a un buffer de tipo List, y devuelve una lista de admins del sistema
+        /// </summary>
         public static List<Admin> GetAdminsList()
         {
             List<Admin> adminsList = new();
@@ -130,6 +206,9 @@ namespace Clases
             }
             return adminsList;
         }
+        /// <summary>
+        /// Devuelve un diccionario de profesores del sistema
+        /// </summary>
         public static Dictionary<string, Usuario?> GetProfesores()
         {
             Dictionary<string, Usuario?> profesores = new ();
@@ -142,6 +221,9 @@ namespace Clases
             }
             return profesores;
         }
+        /// <summary>
+        /// Obtiene cada profesor del diccionario, los agrega a un buffer de tipo List, y devuelve una lista de profesores del sistema
+        /// </summary>
         public static List<Profesor> GetProfesoresList()
         {
             List<Profesor> profesoresList = new ();
@@ -154,6 +236,12 @@ namespace Clases
             }
             return profesoresList;
         }
+        /// <summary>
+        /// Obtiene el profesor correspondiente al usuario recibido por parametro.
+        /// </summary>
+        /// <returns>
+        /// El profesor obtenido.
+        /// </returns>
         public static Profesor? GetProfesor(string usuarioProfesor)
         {
             Profesor? profesorBuff = null;
@@ -170,6 +258,12 @@ namespace Clases
             }
             return profesorBuff;
         }
+        /// <summary>
+        /// Obtiene el profesor correspondiente al dni recibido. Luego, obtiene las materias correspondientes al profesor.
+        /// </summary>
+        /// <returns>
+        /// El diccionario con todas las materias obtenidas
+        /// </returns>
         public static Dictionary<string, Materia> GetMateriasProfesor(int dni)
         {
             Dictionary<string, Materia> materiasProfesor = new ();
@@ -189,6 +283,12 @@ namespace Clases
             }
             return materiasProfesor;
         }
+        /// <summary>
+        /// Llama a GetMateriasProfesor, y convierte ese diccionario de materias del profesor en una lista.
+        /// </summary>
+        /// <returns>
+        /// La lista con todas las materias obtenidas
+        /// </returns>
         public static List<Materia> GetMateriasProfesorList(int dni)
         {
             try
@@ -209,6 +309,9 @@ namespace Clases
                 throw (new Exception($"{ex.Message}"));
             }
         }
+        /// <summary>
+        /// Devuelve un diccionario de alumnos del sistema
+        /// </summary>
         public static Dictionary<string, Usuario?> GetAlumnos()
         {
             Dictionary<string, Usuario?> alumnos = new();
@@ -221,6 +324,9 @@ namespace Clases
             }
             return alumnos;
         }
+        /// <summary>
+        /// Obtiene cada alumno del diccionario, los agrega a un buffer de tipo List, y devuelve una lista de alumnos del sistema
+        /// </summary>
         public static List<Alumno> GetAlumnosList()
         {
             List<Alumno> alumnosList = new();
@@ -233,6 +339,12 @@ namespace Clases
             }
             return alumnosList;
         }
+        /// <summary>
+        /// Obtiene el alumno correspondiente al usuario recibido por parametro.
+        /// </summary>
+        /// <returns>
+        /// El alumno obtenido.
+        /// </returns>
         public static Alumno? GetAlumno(string usuarioAlumno)
         {
             Alumno? alumnoBuff = null;
@@ -249,6 +361,12 @@ namespace Clases
             }
             return alumnoBuff;
         }
+        /// <summary>
+        /// Obtiene el alumno correspondiente al dni recibido por parametro.
+        /// </summary>
+        /// <returns>
+        /// El alumno obtenido.
+        /// </returns>
         public static Alumno? GetAlumnoByDni(int dni)
         {
             Alumno? alumnoBuff = null;
@@ -270,10 +388,16 @@ namespace Clases
             }
             return alumnoBuff;
         }
+        /// <summary>
+        /// Devuelve un diccionario con todas las materias del sistema.
+        /// </summary>
         public static Dictionary<string, Materia?> GetMaterias()
         {
             return _materiasDict;
         }
+        /// <summary>
+        /// Obtiene cada materia del diccionario, los agrega a un buffer de tipo List, y devuelve una lista de materias del sistema
+        /// </summary>
         public static List<Materia> GetMateriasList()
         {
             List<Materia> materiasList = new();
@@ -286,6 +410,12 @@ namespace Clases
             }
             return materiasList;
         }
+        /// <summary>
+        /// Obtiene la materia correspondiente al nombre de materia recibido por parametro.
+        /// </summary>
+        /// <returns>
+        /// La materia obtenida.
+        /// </returns>
         public static Materia? GetMateria(string nombreMateria)
         {
             Materia? materiaBuff = null;
@@ -303,6 +433,9 @@ namespace Clases
             }
             return materiaBuff;
         }
+        /// <summary>
+        /// Agrega el objeto materia recibido por parametro, al diccionario de materias del sistema.
+        /// </summary>
         public static bool AgregarMateria(Materia materia)
         {
             bool retorno = false;
@@ -313,6 +446,12 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Verifica si el string recibido por parametro corresponde a una materia existente
+        /// </summary>
+        /// <returns>
+        /// True si existe, False si no existe.
+        /// </returns>
         public static bool ExistMateria(string nombre)
         {
             bool retorno = false;
@@ -322,6 +461,9 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Carga una materia correlativa existente en el campo _correlativa de la materia recibida por parametro.
+        /// </summary>
         public static bool AsignarCorrelativa(Materia materia, string correlativa)
         {
             bool retorno = false;
@@ -346,6 +488,9 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Asigna un profesor a una materia existente. Carga la materia en el campo _materiasAsignadas del profesor correspondiente. Carga el profesor en la lista de profesores de la materia.
+        /// </summary>
         public static Profesor? AsignarProfesor(Materia materiaBuff, string userProfesor)
         {
             Profesor retorno = null;
@@ -381,6 +526,12 @@ namespace Clases
             }
             return retorno;
         }
+        /// <summary>
+        /// Obtiene el cuatrimestre en formato "eCuatrimestre", correspondiente al string recibido
+        /// </summary>
+        /// <returns>
+        /// Cuatrimestre en formato "eCuatrimestre"
+        /// </returns>
         public static eCuatrimestre GetCuatrimestre(string? cuatri)
         {
             eCuatrimestre retorno = eCuatrimestre.Primero;

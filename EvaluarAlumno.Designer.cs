@@ -103,12 +103,12 @@
             // 
             // cmbMateria
             // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.FormattingEnabled = true;
             this.cmbMateria.Location = new System.Drawing.Point(51, 191);
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(231, 23);
             this.cmbMateria.TabIndex = 32;
-            this.cmbMateria.Text = "seleccionar materia...";
             // 
             // nudPrimero
             // 
@@ -260,11 +260,12 @@
             this.Controls.Add(this.btnMostrarMaterias);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "EvaluarAlumno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "EvaluarAlumno";
+            this.Text = "Evaluar un alumno";
             this.Load += new System.EventHandler(this.EvaluarAlumno_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudPrimero)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nudSegundo)).EndInit();

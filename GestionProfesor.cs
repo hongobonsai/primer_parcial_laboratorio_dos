@@ -34,14 +34,29 @@ namespace alonso_nicolas_primer_parcial_labo
 
         private void btnCrearExamen_Click(object sender, EventArgs e)
         {
-            AltaExamen altaExamenMenu = new (_profesorLogueado);
-            altaExamenMenu.Show();
+            try
+            {
+                SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
+                AltaExamen altaExamenMenu = new(_profesorLogueado);
+                altaExamenMenu.ShowDialog();
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnEvaluarAlumno_Click(object sender, EventArgs e)
         {
-            EvaluarAlumno evaluarAlumnoMenu = new(_profesorLogueado);
-            evaluarAlumnoMenu.Show();
+            try
+            {
+                SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
+                EvaluarAlumno evaluarAlumnoMenu = new(_profesorLogueado);
+                evaluarAlumnoMenu.ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            };
         }
 
         private void btnVerMaterias_Click(object sender, EventArgs e)

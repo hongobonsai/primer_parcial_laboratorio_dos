@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Clases.enums
 {
+    /// <summary>
+    /// Enumerado de genero. Contiene Masculino, Femenino y Otro.
+    /// </summary>
     public enum eGenero
     {
         Masculino,

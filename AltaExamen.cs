@@ -14,12 +14,12 @@ namespace alonso_nicolas_primer_parcial_labo
     public partial class AltaExamen : Form
     {
         Profesor _profesor;
-        Dictionary<string, Materia?> _materiasDict;
+        Dictionary<string, Materia> _materiasDict;
         public AltaExamen(Profesor profesor)
         {
             InitializeComponent();
             _profesor = profesor;
-            _materiasDict = SysControl.GetMaterias();
+            _materiasDict = SysControl.GetMateriasProfesor(_profesor.Dni);
         }
 
         private void AltaExamen_Load(object sender, EventArgs e)
@@ -31,7 +31,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             StringBuilder sb = new();
             Dictionary<string, Materia?> materiasDict = new();
-            materiasDict = SysControl.GetMaterias();
+            materiasDict = SysControl.GetMateriasProfesor(_profesor.Dni);
             DataGrid datagrid = new("materia");
             foreach (KeyValuePair<string, Materia> materia in materiasDict)
             {

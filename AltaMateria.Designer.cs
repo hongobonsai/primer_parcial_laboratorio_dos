@@ -99,12 +99,12 @@
             // 
             // cmbCuatrimestre
             // 
+            this.cmbCuatrimestre.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCuatrimestre.FormattingEnabled = true;
             this.cmbCuatrimestre.Location = new System.Drawing.Point(18, 96);
             this.cmbCuatrimestre.Name = "cmbCuatrimestre";
             this.cmbCuatrimestre.Size = new System.Drawing.Size(231, 23);
             this.cmbCuatrimestre.TabIndex = 14;
-            this.cmbCuatrimestre.Text = "seleccionar cuatrimestre...";
             // 
             // btnCrearMateria
             // 
@@ -152,6 +152,7 @@
             this.gpbUsuario.TabIndex = 9;
             this.gpbUsuario.TabStop = false;
             this.gpbUsuario.Text = "Datos extra";
+            this.gpbUsuario.Enter += new System.EventHandler(this.gpbUsuario_Enter);
             // 
             // btnMostrarMaterias
             // 
@@ -181,24 +182,24 @@
             // 
             // cmbAgregarCorrelativa
             // 
+            this.cmbAgregarCorrelativa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAgregarCorrelativa.Enabled = false;
             this.cmbAgregarCorrelativa.FormattingEnabled = true;
             this.cmbAgregarCorrelativa.Location = new System.Drawing.Point(18, 167);
             this.cmbAgregarCorrelativa.Name = "cmbAgregarCorrelativa";
             this.cmbAgregarCorrelativa.Size = new System.Drawing.Size(231, 23);
             this.cmbAgregarCorrelativa.TabIndex = 11;
-            this.cmbAgregarCorrelativa.Text = "seleccionar materia...";
             this.cmbAgregarCorrelativa.SelectedIndexChanged += new System.EventHandler(this.cmbAgregarCorrelativa_SelectedIndexChanged);
             // 
             // cmbAgregarProfesor
             // 
+            this.cmbAgregarProfesor.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbAgregarProfesor.Enabled = false;
             this.cmbAgregarProfesor.FormattingEnabled = true;
             this.cmbAgregarProfesor.Location = new System.Drawing.Point(18, 91);
             this.cmbAgregarProfesor.Name = "cmbAgregarProfesor";
             this.cmbAgregarProfesor.Size = new System.Drawing.Size(231, 23);
             this.cmbAgregarProfesor.TabIndex = 10;
-            this.cmbAgregarProfesor.Text = "seleccionar profesor...";
             // 
             // chbAgregarCorrelativa
             // 
@@ -246,11 +247,12 @@
             this.Controls.Add(this.lblTitle);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AltaMateria";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "AltaUsuario";
+            this.Text = "Crear nueva materia";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AltaMateria_FormClosed);
             this.Load += new System.EventHandler(this.AltaMateria_Load);
             this.gpbLog.ResumeLayout(false);

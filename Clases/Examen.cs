@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Clases
 {
+    /// <summary>
+    /// Esta clase representa un examen academico. Almacena los datos correspondientes a un examen
+    /// </summary>
     public class Examen
     {
         private string _nombre;

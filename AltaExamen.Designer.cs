@@ -133,12 +133,12 @@
             // 
             // cmbMateria
             // 
+            this.cmbMateria.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbMateria.FormattingEnabled = true;
             this.cmbMateria.Location = new System.Drawing.Point(18, 98);
             this.cmbMateria.Name = "cmbMateria";
             this.cmbMateria.Size = new System.Drawing.Size(231, 23);
             this.cmbMateria.TabIndex = 14;
-            this.cmbMateria.Text = "seleccionar materia...";
             // 
             // btnCrearExamen
             // 
@@ -186,10 +186,11 @@
             this.Controls.Add(this.lblTitle);
             this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AltaExamen";
-            this.Text = "AltaExamen";
+            this.Text = "Crear nuevo examen";
             this.Load += new System.EventHandler(this.AltaExamen_Load);
             this.gpbLog.ResumeLayout(false);
             this.gpbLog.PerformLayout();

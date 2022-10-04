@@ -14,6 +14,7 @@ namespace alonso_nicolas_primer_parcial_labo
 {
     public partial class DataGridProfesor : Form
     {
+        private Dictionary<string, Materia> _materiasDict = new();
         private List<Materia> _materiasList = new();
         private Profesor _profesorLogueado;
         BindingSource bindingSource = new();
@@ -27,14 +28,23 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
+                _materiasDict = SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
                 _materiasList = SysControl.GetMateriasProfesorList(_profesorLogueado.Dni);
                 bindingSource.DataSource = _materiasList;
                 dgvMateriasProfe.DataSource = bindingSource;
+                cmbMateria.DataSource = _materiasDict.ToList(); cmbMateria.DisplayMember = "Key";
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+        }
+
+        private void btnVerMaterias_Click(object sender, EventArgs e)
+        {
+
+            DataGridListaAlumnos listaAlumnosDvg = new(SysControl.GetMateria(cmbMateria.Text));
+            listaAlumnosDvg.ShowDialog();
         }
     }
 }

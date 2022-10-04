@@ -32,8 +32,8 @@
             this.LblTitle = new System.Windows.Forms.Label();
             this.GpbAdministracionMaterias = new System.Windows.Forms.GroupBox();
             this.BtnAsignarProfesor = new System.Windows.Forms.Button();
-            this.BtnCambiarEstado = new System.Windows.Forms.Button();
             this.BtnCrearMateria = new System.Windows.Forms.Button();
+            this.BtnCambiarEstado = new System.Windows.Forms.Button();
             this.GpbAdministracionUsuarios = new System.Windows.Forms.GroupBox();
             this.BtnAltaAlumno = new System.Windows.Forms.Button();
             this.BtnAltaAcademico = new System.Windows.Forms.Button();
@@ -85,22 +85,6 @@
             this.BtnAsignarProfesor.UseVisualStyleBackColor = true;
             this.BtnAsignarProfesor.Click += new System.EventHandler(this.BtnAsignarProfesor_Click);
             // 
-            // BtnCambiarEstado
-            // 
-            this.BtnCambiarEstado.BackgroundImage = global::alonso_nicolas_primer_parcial_labo.Properties.Resources.Sin_título;
-            this.BtnCambiarEstado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.BtnCambiarEstado.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.BtnCambiarEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
-            this.BtnCambiarEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
-            this.BtnCambiarEstado.Location = new System.Drawing.Point(384, 297);
-            this.BtnCambiarEstado.Name = "BtnCambiarEstado";
-            this.BtnCambiarEstado.Size = new System.Drawing.Size(305, 39);
-            this.BtnCambiarEstado.TabIndex = 4;
-            this.BtnCambiarEstado.Text = "Cambiar regularidad de un alumno";
-            this.BtnCambiarEstado.UseVisualStyleBackColor = true;
-            this.BtnCambiarEstado.Click += new System.EventHandler(this.BtnCambiarEstado_Click);
-            // 
             // BtnCrearMateria
             // 
             this.BtnCrearMateria.BackgroundImage = global::alonso_nicolas_primer_parcial_labo.Properties.Resources.Sin_título;
@@ -116,6 +100,22 @@
             this.BtnCrearMateria.Text = "Crear materia";
             this.BtnCrearMateria.UseVisualStyleBackColor = true;
             this.BtnCrearMateria.Click += new System.EventHandler(this.BtnCrearMateria_Click);
+            // 
+            // BtnCambiarEstado
+            // 
+            this.BtnCambiarEstado.BackgroundImage = global::alonso_nicolas_primer_parcial_labo.Properties.Resources.Sin_título;
+            this.BtnCambiarEstado.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.BtnCambiarEstado.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.BtnCambiarEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.BtnCambiarEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
+            this.BtnCambiarEstado.Location = new System.Drawing.Point(384, 297);
+            this.BtnCambiarEstado.Name = "BtnCambiarEstado";
+            this.BtnCambiarEstado.Size = new System.Drawing.Size(305, 39);
+            this.BtnCambiarEstado.TabIndex = 4;
+            this.BtnCambiarEstado.Text = "Cambiar regularidad de un alumno";
+            this.BtnCambiarEstado.UseVisualStyleBackColor = true;
+            this.BtnCambiarEstado.Click += new System.EventHandler(this.BtnCambiarEstado_Click);
             // 
             // GpbAdministracionUsuarios
             // 
@@ -199,7 +199,7 @@
             this.MinimizeBox = false;
             this.Name = "GestionAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "GestionAdmin";
+            this.Text = "ADMIN - Gestión";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GestionAdmin_FormClosing);
             this.Load += new System.EventHandler(this.GestionAdmin_Load);
             this.GpbAdministracionMaterias.ResumeLayout(false);

@@ -28,6 +28,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
+                //_materiasDict = SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
                 _materiasDict = SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
                 cmbMateria.DataSource = _materiasDict.ToList(); cmbMateria.DisplayMember = "Key";
             }
@@ -53,13 +54,20 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                if (Profesor.FinalizarCuatrimestre(int.Parse(txtDni.Text), cmbMateria.Text, (int)nudPrimero.Value, (int)nudSegundo.Value))
+                if(!string.IsNullOrWhiteSpace(txtDni.Text))
                 {
-                    MessageBox.Show("El alumno finalizó la materia APROBADO");
+                    if (Profesor.FinalizarCuatrimestre(int.Parse(txtDni.Text), cmbMateria.Text, (int)nudPrimero.Value, (int)nudSegundo.Value))
+                    {
+                        MessageBox.Show("El alumno finalizó la materia APROBADO");
+                    }
+                    else
+                    {
+                        MessageBox.Show("El alumno finalizó la materia DESAPROBADO");
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("El alumno finalizó la materia DESAPROBADO");
+                    throw new Exception("Completar el dni.");
                 }
             }
             catch(Exception ex)

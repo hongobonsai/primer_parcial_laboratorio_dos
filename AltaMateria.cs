@@ -27,7 +27,6 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             InitializeComponent();
             adminMenu = admMenu;
-            //TODO solucionar el asunto de los tipo de usuario, el enum que no anda (llega null)
             _adminLogueado = admin;
         }
 
@@ -123,6 +122,11 @@ namespace alonso_nicolas_primer_parcial_labo
         }
 
         private void cmbAgregarCorrelativa_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void gpbUsuario_Enter(object sender, EventArgs e)
         {
 
         }

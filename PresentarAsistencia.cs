@@ -1,4 +1,5 @@
-﻿using Clases;
+﻿using alonso_nicolas_primer_parcial_labo.Clases.enums;
+using Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;

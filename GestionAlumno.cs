@@ -38,13 +38,43 @@ namespace alonso_nicolas_primer_parcial_labo
 
         private void btnAsistencia_Click(object sender, EventArgs e)
         {
-            PresentarAsistencia asistenciaMenu = new(_alumnoLogueado);
-            asistenciaMenu.Show();
+            try
+            {
+                if (_alumnoLogueado.EstaCursandoAlgo())
+                {
+                    PresentarAsistencia asistenciaMenu = new(_alumnoLogueado);
+                    asistenciaMenu.ShowDialog();
+                }
+                else
+                {
+                    throw new Exception("No estas inscripto en ninguna materia.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            try
+            {
+                if (_alumnoLogueado.EstaCursandoAlgo())
+                {
+                    DataGridAlumno verMateriasAluMenu = new(_alumnoLogueado);
+                    verMateriasAluMenu.ShowDialog();
+                }
+                else
+                {
+                    throw new Exception("No estas inscripto en ninguna materia.");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
 
+            }
         }
     }
 }

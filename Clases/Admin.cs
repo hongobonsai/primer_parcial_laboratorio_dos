@@ -1,13 +1,21 @@
-﻿using Clases.enums;
+﻿using alonso_nicolas_primer_parcial_labo.Clases.enums;
+using Clases.enums;
 
 namespace Clases
 {
-    public class Admin : Usuario
+    public sealed class Admin : Usuario
     {
+        /// <summary>
+        /// Esta clase representa a un administrador del sistema.
+        /// Hereda de Usuario
+        /// </summary>
         public Admin(string? user, string? pass, eType type) : base(user, pass, type)
         {
-            
+            //TODO HACER QUE SOLO SE PUEDA VERIFICAR QUE APRUEBE SI ESTA PRESENTE Y ETC QUE DIJO RAMPI XD
         }
+        /// <summary>
+        /// Valida usuario y contraseña, Instancia un Admin con los parametros recibidos, y llama al metodo "AgregarUsuario", al que le pasa el admin instanciado anteriormente.
+        /// </summary>
         public static void NewAdmin(string user, string pass)
         {
             if (user != "" && pass != "")
@@ -27,7 +35,9 @@ namespace Clases
                 throw new Exception("Completar los campos requeridos.");
             }
         }
-        //TODO validar datetime con el <= datetimepicker now
+        /// <summary>
+        /// Valida datos de academico recibidos, Instancia un Alumno o un Profesor, dependiendo el eType del Academico, y llama al metodo "AgregarUsuario", al que le pasa el Alumno o Profesor según corresponda.
+        /// </summary>
         public static void NewAcademico(string? user, string? pass, eType type, string? nombre, string? apellido, string? dniStr, DateTime nacimiento, eGenero genero)
         {
             int dni;
@@ -36,17 +46,23 @@ namespace Clases
                 try
                 {
                     Academico.ValidarDatosAcademico(user, pass, type, nombre, apellido, dniStr, nacimiento, genero);
-                    if (type == eType.Alumno)
+                    dni = int.Parse(dniStr);
+                    if (SysControl.ExistsDni(dni))
                     {
-                        dni = int.Parse(dniStr);
-                        Alumno alumno = new(user, pass, type, nombre, apellido, dni, nacimiento, genero);
-                        SysControl.AgregarUsuario(alumno);
+                        throw new Exception("El DNI ingresado ya existe.");
                     }
-                    else if (type == eType.Profesor)
+                    else
                     {
-                        dni = int.Parse(dniStr);
-                        Profesor profesor = new(user, pass, type, nombre, apellido, dni, nacimiento, genero);
-                        SysControl.AgregarUsuario(profesor);
+                        if (type == eType.Alumno)
+                        {
+                            Alumno alumno = new(user, pass, type, nombre, apellido, dni, nacimiento, genero);
+                            SysControl.AgregarUsuario(alumno);
+                        }
+                        else if (type == eType.Profesor)
+                        {
+                            Profesor profesor = new(user, pass, type, nombre, apellido, dni, nacimiento, genero);
+                            SysControl.AgregarUsuario(profesor);
+                        }
                     }
                 }
                 catch(Exception ex)
@@ -59,16 +75,19 @@ namespace Clases
             throw new Exception("El usuario ingresado ya existe.");
             }
         }
+        /// <summary>
+        /// Modifica la regularidad de la cursada del alumno recibido, en la materia recibida. Asigna la regularidad recibida por parametro.
+        /// </summary>
         public static void CambiarRegularidad(Alumno? alumno, MateriaCursada materia, eRegularidad regularidad)
         {
             bool cursaMateria = false;
             if (alumno != null && materia != null)
             {
-                if(alumno.MateriasActuales != null)
+                if(alumno.MateriasCursadas != null)
                 {
-                    foreach (MateriaCursada matCur in alumno.MateriasActuales)
+                    foreach (MateriaCursada matCur in alumno.MateriasCursadas)
                     {
-                        if(matCur.Nombre == materia.Nombre)
+                        if((string)matCur == (string)materia)
                         {
                             cursaMateria = true;
                             matCur.Regularidad = regularidad;

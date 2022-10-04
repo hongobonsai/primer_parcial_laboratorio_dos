@@ -8,9 +8,11 @@ using Clases.enums;
 
 namespace Clases
 {
+    /// <summary>
+    /// Esta clase representa una materia como objeto en sí.
+    /// </summary>
     public class Materia
     {
-        //TODO no se
         private string? _nombre;
         private string? _correlativa;
         private eCuatrimestre _cuatrimestre;
@@ -46,5 +48,12 @@ namespace Clases
             }
         }
         public string? Correlativa { get => _correlativa; set => _correlativa = value; }
+        /// <summary>
+        /// Devuelve la lista de alumnos que cursan la materia.
+        /// </summary>
+        public List<Alumno> GetAlumnosList()
+        {
+            return _alumnos;
+        }
     }
 }

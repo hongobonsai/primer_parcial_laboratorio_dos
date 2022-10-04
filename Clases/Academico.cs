@@ -10,6 +10,10 @@ using Clases.enums;
 
 namespace Clases
 {
+    /// <summary>
+    /// Esta clase representa la clase padre de profesor y de alumno. Almacena los datos correspondientes a la persona.
+    /// Hereda de Usuario
+    /// </summary>
     public abstract class Academico : Usuario
     {
         private string? _nombre;
@@ -50,6 +54,13 @@ namespace Clases
             get { return _genero; }
             set { _genero = value; }
         }
+        /// <summary>
+        /// Valida los datos del academico, los cuales recibe por parametro. Verifica que los campos no se encuentren vacíos, y que los datos
+        /// correspondan a los esperados.
+        /// </summary>
+        /// <returns>
+        /// True = OK, False = NO VALIDO CORRECTAMENTE
+        /// </returns>
         public static bool ValidarDatosAcademico(string? user, string? pass, eType type, string? nombre, string? apellido, string dniStr, DateTime nacimiento, eGenero genero)
         {
             bool retorno = false;
