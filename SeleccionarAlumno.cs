@@ -39,7 +39,7 @@ namespace alonso_nicolas_primer_parcial_labo
                         {
                             _alumnoAInscribir = SysControl.GetAlumnoByDni(int.Parse(txtDni.Text));
                             InscribirAlumno inscribirAlumnoMenu = new(_alumnoAInscribir);
-                            inscribirAlumnoMenu.Show();
+                            inscribirAlumnoMenu.ShowDialog();
                         }
                         catch (Exception ex)
                         {
