@@ -38,7 +38,7 @@ namespace Clases
             _usuariosDict.Add("adeyua", new Profesor("adeyua", "adeyua", eType.Profesor, "Andrea", "Deyuanine", 18923601, nacimientoCuatro, eGenero.Femenino));
             _usuariosDict.Add("fcardon", new Alumno("fcardon", "meahorrolacuota", eType.Alumno, "Franco", "Cardon", 43982312, nacimientoDos, eGenero.Otro));
             _usuariosDict.Add("jorgeluis", new Alumno("jorgeluis", "jorgeluis", eType.Alumno, "Jorge", "Luis", 39842100, nacimientoTres, eGenero.Masculino));
-            _usuariosDict.Add("ayeazu", new Alumno("ayeazu", "jorgeluis", eType.Alumno, "Ayelen", "Azul", 60923812, nacimientoCinco, eGenero.Femenino));
+            _usuariosDict.Add("ayeazu", new Alumno("ayeazu", "ayeazu", eType.Alumno, "Ayelen", "Azul", 60923812, nacimientoCinco, eGenero.Femenino));
             _materiasDict.Add("matematica", new Materia("matematica", eCuatrimestre.Primero));
             _materiasDict.Add("spd", new Materia("spd", eCuatrimestre.Primero));
             _materiasDict.Add("arquitectura so", new Materia("arquitectura so", eCuatrimestre.Segundo));
@@ -370,6 +370,7 @@ namespace Clases
         public static Alumno? GetAlumnoByDni(int dni)
         {
             Alumno? alumnoBuff = null;
+            Alumno? alumnoEncontrado = null;
             foreach (KeyValuePair<string, Usuario> item in _usuariosDict)
             {
                 if(item.Value.tipoUsuario == eType.Alumno)
@@ -377,16 +378,16 @@ namespace Clases
                     alumnoBuff = (Alumno)item.Value;
                     if (alumnoBuff.Dni == dni)
                     {
-                        alumnoBuff = (Alumno)item.Value;
+                        alumnoEncontrado = alumnoBuff;
                         break;
                     }
                 }
             }
-            if (alumnoBuff == null)
+            if (alumnoEncontrado == null)
             {
                 throw (new Exception("El dni ingresado no corresponde a un alumno."));
             }
-            return alumnoBuff;
+            return alumnoEncontrado;
         }
         /// <summary>
         /// Devuelve un diccionario con todas las materias del sistema.

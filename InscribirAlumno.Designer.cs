@@ -31,7 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InscribirAlumno));
             this.btnMostrarMaterias = new System.Windows.Forms.Button();
             this.cmbMateria = new System.Windows.Forms.ComboBox();
-            this.lblProfesor = new System.Windows.Forms.Label();
+            this.lblTitle = new System.Windows.Forms.Label();
             this.BtnInscribirAlumno = new System.Windows.Forms.Button();
             this.lblError = new System.Windows.Forms.Label();
             this.lblMateria = new System.Windows.Forms.Label();
@@ -60,16 +60,16 @@
             this.cmbMateria.Size = new System.Drawing.Size(231, 23);
             this.cmbMateria.TabIndex = 15;
             // 
-            // lblProfesor
+            // lblTitle
             // 
-            this.lblProfesor.AutoSize = true;
-            this.lblProfesor.BackColor = System.Drawing.Color.Transparent;
-            this.lblProfesor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.lblProfesor.Location = new System.Drawing.Point(56, 40);
-            this.lblProfesor.Name = "lblProfesor";
-            this.lblProfesor.Size = new System.Drawing.Size(153, 21);
-            this.lblProfesor.TabIndex = 18;
-            this.lblProfesor.Text = "Inscribirse a materia:";
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.Location = new System.Drawing.Point(-1, 34);
+            this.lblTitle.Name = "lblTitle";
+            this.lblTitle.Size = new System.Drawing.Size(343, 35);
+            this.lblTitle.TabIndex = 18;
+            this.lblTitle.Text = "Inscribirse a materia:";
+            this.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BtnInscribirAlumno
             // 
@@ -118,7 +118,7 @@
             this.Controls.Add(this.lblMateria);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.BtnInscribirAlumno);
-            this.Controls.Add(this.lblProfesor);
+            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnMostrarMaterias);
             this.Controls.Add(this.cmbMateria);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -135,7 +135,7 @@
 
         private Button btnMostrarMaterias;
         private ComboBox cmbMateria;
-        private Label lblProfesor;
+        private Label lblTitle;
         private Button BtnInscribirAlumno;
         private Label lblError;
         private Label lblMateria;

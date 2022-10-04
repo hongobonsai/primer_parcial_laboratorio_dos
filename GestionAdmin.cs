@@ -59,5 +59,11 @@ namespace alonso_nicolas_primer_parcial_labo
             CambiarRegularidad regularidadMenu = new();
             regularidadMenu.ShowDialog();
         }
+
+        private void btnInscribirAlumno_Click(object sender, EventArgs e)
+        {
+            SeleccionarAlumno SeleccionMenu = new();
+            SeleccionMenu.ShowDialog();
+        }
     }
 }

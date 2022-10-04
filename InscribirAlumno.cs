@@ -25,6 +25,13 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             _materiasDict = SysControl.GetMaterias();
             cmbMateria.DataSource = _materiasDict.ToList(); cmbMateria.DisplayMember = "Key";
+            if (_alumno.Genero != eGenero.Femenino)
+            {
+                lblTitle.Text = $"Inscripcion del alumno {_alumno.Nombre} {_alumno.Apellido}";
+            } else
+            {
+                lblTitle.Text = $"Inscripcion de la alumna {_alumno.Nombre} {_alumno.Apellido}";
+            }
         }
         private void btnMostrarMaterias_Click(object sender, EventArgs e)
         {

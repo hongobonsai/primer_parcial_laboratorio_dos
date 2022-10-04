@@ -59,6 +59,7 @@
             this.lblDni.Size = new System.Drawing.Size(146, 15);
             this.lblDni.TabIndex = 37;
             this.lblDni.Text = "Ingrese el DNI del alumno:";
+            this.lblDni.Click += new System.EventHandler(this.lblDni_Click);
             // 
             // txtDni
             // 
@@ -68,6 +69,7 @@
             this.txtDni.PlaceholderText = "dni...";
             this.txtDni.Size = new System.Drawing.Size(120, 23);
             this.txtDni.TabIndex = 36;
+            this.txtDni.TextChanged += new System.EventHandler(this.txtDni_TextChanged);
             // 
             // lblTitle
             // 
@@ -79,6 +81,7 @@
             this.lblTitle.Size = new System.Drawing.Size(162, 21);
             this.lblTitle.TabIndex = 35;
             this.lblTitle.Text = "Finalizar Cuatrimestre";
+            this.lblTitle.Click += new System.EventHandler(this.lblTitle_Click);
             // 
             // lblMateria
             // 
@@ -234,6 +237,7 @@
             this.picUtn.Size = new System.Drawing.Size(109, 63);
             this.picUtn.TabIndex = 10;
             this.picUtn.TabStop = false;
+            this.picUtn.Click += new System.EventHandler(this.picUtn_Click);
             // 
             // lblError
             // 

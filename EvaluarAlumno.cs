@@ -76,5 +76,25 @@ namespace alonso_nicolas_primer_parcial_labo
                 lblError.Text = ex.Message;
             }
         }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTitle_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblDni_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void picUtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

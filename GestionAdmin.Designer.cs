@@ -38,15 +38,20 @@
             this.BtnAltaAlumno = new System.Windows.Forms.Button();
             this.BtnAltaAcademico = new System.Windows.Forms.Button();
             this.BtnAltaAdmin = new System.Windows.Forms.Button();
+            this.btnInscribirAlumno = new System.Windows.Forms.Button();
+            this.picUtn = new System.Windows.Forms.PictureBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.GpbAdministracionMaterias.SuspendLayout();
             this.GpbAdministracionUsuarios.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picUtn)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // LblTitle
             // 
             this.LblTitle.BackColor = System.Drawing.Color.Transparent;
             this.LblTitle.Font = new System.Drawing.Font("Impact", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.LblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
+            this.LblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(85)))), ((int)(((byte)(38)))), ((int)(((byte)(38)))));
             this.LblTitle.Location = new System.Drawing.Point(0, 31);
             this.LblTitle.Name = "LblTitle";
             this.LblTitle.Size = new System.Drawing.Size(718, 64);
@@ -64,7 +69,7 @@
             this.GpbAdministracionMaterias.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
             this.GpbAdministracionMaterias.Location = new System.Drawing.Point(384, 110);
             this.GpbAdministracionMaterias.Name = "GpbAdministracionMaterias";
-            this.GpbAdministracionMaterias.Size = new System.Drawing.Size(305, 162);
+            this.GpbAdministracionMaterias.Size = new System.Drawing.Size(305, 139);
             this.GpbAdministracionMaterias.TabIndex = 5;
             this.GpbAdministracionMaterias.TabStop = false;
             this.GpbAdministracionMaterias.Text = "Administración de materias";
@@ -77,7 +82,7 @@
             this.BtnAsignarProfesor.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnAsignarProfesor.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.BtnAsignarProfesor.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
-            this.BtnAsignarProfesor.Location = new System.Drawing.Point(17, 100);
+            this.BtnAsignarProfesor.Location = new System.Drawing.Point(17, 84);
             this.BtnAsignarProfesor.Name = "BtnAsignarProfesor";
             this.BtnAsignarProfesor.Size = new System.Drawing.Size(264, 39);
             this.BtnAsignarProfesor.TabIndex = 5;
@@ -109,9 +114,9 @@
             this.BtnCambiarEstado.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnCambiarEstado.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.BtnCambiarEstado.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
-            this.BtnCambiarEstado.Location = new System.Drawing.Point(384, 297);
+            this.BtnCambiarEstado.Location = new System.Drawing.Point(15, 30);
             this.BtnCambiarEstado.Name = "BtnCambiarEstado";
-            this.BtnCambiarEstado.Size = new System.Drawing.Size(305, 39);
+            this.BtnCambiarEstado.Size = new System.Drawing.Size(275, 39);
             this.BtnCambiarEstado.TabIndex = 4;
             this.BtnCambiarEstado.Text = "Cambiar regularidad de un alumno";
             this.BtnCambiarEstado.UseVisualStyleBackColor = true;
@@ -181,15 +186,58 @@
             this.BtnAltaAdmin.UseVisualStyleBackColor = true;
             this.BtnAltaAdmin.Click += new System.EventHandler(this.BtnAltaAdmin_Click);
             // 
+            // btnInscribirAlumno
+            // 
+            this.btnInscribirAlumno.BackgroundImage = global::alonso_nicolas_primer_parcial_labo.Properties.Resources.Sin_título;
+            this.btnInscribirAlumno.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnInscribirAlumno.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnInscribirAlumno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInscribirAlumno.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.btnInscribirAlumno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
+            this.btnInscribirAlumno.Location = new System.Drawing.Point(15, 84);
+            this.btnInscribirAlumno.Name = "btnInscribirAlumno";
+            this.btnInscribirAlumno.Size = new System.Drawing.Size(275, 39);
+            this.btnInscribirAlumno.TabIndex = 6;
+            this.btnInscribirAlumno.Text = "Inscribir un alumno a una materia";
+            this.btnInscribirAlumno.UseVisualStyleBackColor = true;
+            this.btnInscribirAlumno.Click += new System.EventHandler(this.btnInscribirAlumno_Click);
+            // 
+            // picUtn
+            // 
+            this.picUtn.BackColor = System.Drawing.Color.Transparent;
+            this.picUtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picUtn.BackgroundImage")));
+            this.picUtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picUtn.Location = new System.Drawing.Point(27, 336);
+            this.picUtn.Name = "picUtn";
+            this.picUtn.Size = new System.Drawing.Size(181, 77);
+            this.picUtn.TabIndex = 42;
+            this.picUtn.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.BackColor = System.Drawing.Color.Transparent;
+            this.groupBox1.Controls.Add(this.BtnCambiarEstado);
+            this.groupBox1.Controls.Add(this.btnInscribirAlumno);
+            this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point);
+            this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(40)))), ((int)(((byte)(40)))));
+            this.groupBox1.Location = new System.Drawing.Point(384, 255);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(305, 142);
+            this.groupBox1.TabIndex = 6;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Administración de alumnos";
+            // 
             // GestionAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(717, 361);
+            this.ClientSize = new System.Drawing.Size(717, 413);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.picUtn);
             this.Controls.Add(this.GpbAdministracionMaterias);
-            this.Controls.Add(this.BtnCambiarEstado);
             this.Controls.Add(this.GpbAdministracionUsuarios);
             this.Controls.Add(this.LblTitle);
             this.DoubleBuffered = true;
@@ -204,6 +252,8 @@
             this.Load += new System.EventHandler(this.GestionAdmin_Load);
             this.GpbAdministracionMaterias.ResumeLayout(false);
             this.GpbAdministracionUsuarios.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picUtn)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -219,5 +269,8 @@
         private Button BtnAltaAdmin;
         private Button BtnAltaAcademico;
         private Button BtnAltaAlumno;
+        private Button btnInscribirAlumno;
+        private PictureBox picUtn;
+        private GroupBox groupBox1;
     }
 }
