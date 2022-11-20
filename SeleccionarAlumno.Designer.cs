@@ -124,9 +124,12 @@
             this.Controls.Add(this.lblTitle);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "SeleccionarAlumno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "¿Que alumno desea inscribir?";
+            this.Load += new System.EventHandler(this.SeleccionarAlumno_Load);
             ((System.ComponentModel.ISupportInitialize)(this.picUtn)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

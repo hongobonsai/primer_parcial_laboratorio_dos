@@ -121,7 +121,10 @@
             this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.btnMostrarMaterias);
             this.Controls.Add(this.cmbMateria);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "InscribirAlumno";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Inscripción a materia";

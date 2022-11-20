@@ -195,6 +195,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AltaExamen";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear nuevo examen";
             this.Load += new System.EventHandler(this.AltaExamen_Load);
             this.gpbLog.ResumeLayout(false);

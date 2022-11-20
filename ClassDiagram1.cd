@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Clases.Academico" Collapsed="true">
+    <Position X="8.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAFAAAAAAAAAABREAAAAgQIAAAAAAAAAAAAAAAIIAAA=</HashCode>
+      <FileName>Clases\Academico.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.Admin" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAAAACAAAAQAAAAAAAAA=</HashCode>
+      <FileName>Clases\Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.Alumno" Collapsed="true">
+    <Position X="7.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAACAAAAgIAUCAAAACAABAIAAAAIAAA=</HashCode>
+      <FileName>Clases\Alumno.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.Examen" Collapsed="true">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAEAAAAAgAAAAAQAAAAACAAAAAIAAAA=</HashCode>
+      <FileName>Clases\Examen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.Funcionalidades" Collapsed="true">
+    <Position X="16.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAgAAAAAAAAAAAAAAAAAAAAIAA=</HashCode>
+      <FileName>Clases\Funcionalidades.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.Materia" Collapsed="true">
+    <Position X="18" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAACAAQiAAABQAAgAAYAAAAQBIAAAA=</HashCode>
+      <FileName>Clases\Materia.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.MateriaCursada" Collapsed="true">
+    <Position X="14.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABCAkAAAgBAAAAAQAgAgAAAACAAAAAACCAAIAAAg=</HashCode>
+      <FileName>Clases\MateriaCursada.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.Profesor" Collapsed="true">
+    <Position X="9.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAQAAgAAAAACAggAAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>Clases\Profesor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.SysControl" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAkBAAFQQAAAAAIAAggRAAARAihAAFAAAAggA4gBA=</HashCode>
+      <FileName>Clases\SysControl.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Clases.Usuario" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAQAAAQAACAAAAAAIACAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="alonso_nicolas_primer_parcial_labo.Clases.enums.eAsistencia" Collapsed="true">
+    <Position X="14.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Clases\enums\eAsistencia.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="alonso_nicolas_primer_parcial_labo.Clases.enums.eEstadoCursada" Collapsed="true">
+    <Position X="18" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Clases\enums\eEstadoCursada.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="alonso_nicolas_primer_parcial_labo.Clases.enums.eRegularidad" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAABAAAAAAAAEAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\enums\eRegularidad.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Clases.enums.eCuatrimestre" Collapsed="true">
+    <Position X="16.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Clases\enums\eCuatrimestre.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Clases.enums.eGenero" Collapsed="true">
+    <Position X="14.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAAAAAAAAAAAAAIAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Clases\enums\eGenero.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Clases.enums.eType" Collapsed="true">
+    <Position X="18" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAQAAAAAAABAAAAAAABAAAAA=</HashCode>
+      <FileName>Clases\enums\eType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

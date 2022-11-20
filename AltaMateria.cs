@@ -84,29 +84,7 @@ namespace alonso_nicolas_primer_parcial_labo
 
         private void btnMostrarMaterias_Click(object sender, EventArgs e)
         {
-            StringBuilder sb = new();
-            Dictionary<string, Materia?> materiasDict = new();
-            materiasDict = SysControl.GetMaterias();
             DataGrid datagrid = new("materia");
-            foreach (KeyValuePair<string, Materia> materia in materiasDict)
-            {
-
-                sb.AppendLine($"Nombre: {materia.Value.Nombre}");
-                sb.AppendLine($"Cuatri: {materia.Value.Cuatrimestre}");
-                sb.AppendLine($"Correlativa: {materia.Value.Correlativa}");
-                sb.AppendLine($"Profesores: ");
-                foreach (Profesor profesor in materia.Value.Profesores)
-                {
-                    sb.AppendLine($"{profesor.Nombre}" + $" {profesor.Apellido}");
-                }
-                sb.AppendLine($"Alumnos: ");
-                foreach (Alumno alumno in materia.Value.Alumnos)
-                {
-                    sb.AppendLine($"{alumno.Nombre}" + $" {alumno.Apellido}");
-                }
-                sb.AppendLine($"");
-            }
-            MessageBox.Show($"{sb}");
             datagrid.Show();
         }
 

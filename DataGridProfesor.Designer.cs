@@ -35,8 +35,8 @@
             this.lblMateria = new System.Windows.Forms.Label();
             this.cmbMateria = new System.Windows.Forms.ComboBox();
             this.gpbLog = new System.Windows.Forms.GroupBox();
-            this.picUtn = new System.Windows.Forms.PictureBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.picUtn = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMateriasProfe)).BeginInit();
             this.gpbLog.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUtn)).BeginInit();
@@ -116,17 +116,6 @@
             this.gpbLog.TabStop = false;
             this.gpbLog.Text = "Visualización de datos";
             // 
-            // picUtn
-            // 
-            this.picUtn.BackColor = System.Drawing.Color.Transparent;
-            this.picUtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picUtn.BackgroundImage")));
-            this.picUtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picUtn.Location = new System.Drawing.Point(260, 5);
-            this.picUtn.Name = "picUtn";
-            this.picUtn.Size = new System.Drawing.Size(109, 63);
-            this.picUtn.TabIndex = 10;
-            this.picUtn.TabStop = false;
-            // 
             // button1
             // 
             this.button1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button1.BackgroundImage")));
@@ -142,6 +131,17 @@
             this.button1.Text = "VER MIS EXAMENES";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // picUtn
+            // 
+            this.picUtn.BackColor = System.Drawing.Color.Transparent;
+            this.picUtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picUtn.BackgroundImage")));
+            this.picUtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.picUtn.Location = new System.Drawing.Point(260, 5);
+            this.picUtn.Name = "picUtn";
+            this.picUtn.Size = new System.Drawing.Size(109, 63);
+            this.picUtn.TabIndex = 10;
+            this.picUtn.TabStop = false;
             // 
             // DataGridProfesor
             // 

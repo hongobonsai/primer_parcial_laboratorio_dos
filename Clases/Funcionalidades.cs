@@ -37,6 +37,7 @@ namespace Clases
         {
             second.ToList()
                 .ForEach(pair => first[pair.Key] = pair.Value);
+            //second.First().Were(U => U.Key == "Labo");
         }
         /// <summary>
         /// Saca el promedio entre dos notas, devuelve el resultado.

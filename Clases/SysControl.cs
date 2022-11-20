@@ -28,17 +28,12 @@ namespace Clases
         public static void HardcodearDatos()
         {
             Materia materiaBuff;
-            DateTime nacimiento = new(2000, 8, 24);
-            DateTime nacimientoDos = new(1987, 12, 29);
-            DateTime nacimientoTres = new(1970, 6, 17);
-            DateTime nacimientoCuatro = new(1950, 1, 3);
-            DateTime nacimientoCinco = new(2006, 5, 10);
             _usuariosDict.Add("hongobonsai", new Admin("hongobonsai", "soyeladmin", eType.Admin));
-            _usuariosDict.Add("pferrete", new Profesor("pferrete", "quelindaslasmatematicas", eType.Profesor, "Pablo", "Ferrete", 29203223, nacimiento, eGenero.Masculino));
-            _usuariosDict.Add("adeyua", new Profesor("adeyua", "adeyua", eType.Profesor, "Andrea", "Deyuanine", 18923601, nacimientoCuatro, eGenero.Femenino));
-            _usuariosDict.Add("fcardon", new Alumno("fcardon", "meahorrolacuota", eType.Alumno, "Franco", "Cardon", 43982312, nacimientoDos, eGenero.Otro));
-            _usuariosDict.Add("jorgeluis", new Alumno("jorgeluis", "jorgeluis", eType.Alumno, "Jorge", "Luis", 39842100, nacimientoTres, eGenero.Masculino));
-            _usuariosDict.Add("ayeazu", new Alumno("ayeazu", "ayeazu", eType.Alumno, "Ayelen", "Azul", 60923812, nacimientoCinco, eGenero.Femenino));
+            _usuariosDict.Add("pferrete", new Profesor("pferrete", "quelindaslasmatematicas", eType.Profesor, "Pablo", "Ferrete", 29203223, new(2000, 8, 24), eGenero.Masculino));
+            _usuariosDict.Add("adeyua", new Profesor("adeyua", "adeyua", eType.Profesor, "Andrea", "Deyuanine", 18923601, new(1950, 1, 3), eGenero.Femenino));
+            _usuariosDict.Add("fcardon", new Alumno("fcardon", "meahorrolacuota", eType.Alumno, "Franco", "Cardon", 43982312, new(1987, 12, 29), eGenero.Otro));
+            _usuariosDict.Add("jorgeluis", new Alumno("jorgeluis", "jorgeluis", eType.Alumno, "Jorge", "Luis", 39842100, new(1970, 6, 17), eGenero.Masculino));
+            _usuariosDict.Add("ayeazu", new Alumno("ayeazu", "ayeazu", eType.Alumno, "Ayelen", "Azul", 60923812, new(2006, 5, 10), eGenero.Femenino));
             _materiasDict.Add("matematica", new Materia("matematica", eCuatrimestre.Primero));
             _materiasDict.Add("spd", new Materia("spd", eCuatrimestre.Primero));
             _materiasDict.Add("arquitectura so", new Materia("arquitectura so", eCuatrimestre.Segundo));

@@ -16,7 +16,8 @@ namespace Clases
     {
         private List<MateriaCursada>? _materiasCursadas;
 
-        public Alumno(string? user, string? pass, eType type, string? nombre, string? apellido, int dni, DateTime nacimiento, eGenero genero) : base(user, pass, type, nombre, apellido, dni, nacimiento, genero)
+        public Alumno(string? user, string? pass, eType type, string? nombre, string? apellido, int dni,
+            DateTime nacimiento, eGenero genero) : base(user, pass, type, nombre, apellido, dni, nacimiento, genero)
         {
             _materiasCursadas = new();
         }
@@ -34,7 +35,7 @@ namespace Clases
             MateriaCursada retorno = null;
             Materia? materiaBuff;
             MateriaCursada materiaInscribirse;
-            bool aproboCorrelativa = true;
+            bool cursoCorrelativa = false;
             if (nombreMateria != "")
             {
                 try
@@ -47,27 +48,27 @@ namespace Clases
                             throw new Exception("El alumno ya está inscripto a la materia.");
                         }
                     }
-                    if (materiaBuff.Correlativa != "Ninguna")
+                    foreach (MateriaCursada materia in alumno._materiasCursadas)
                     {
-                        aproboCorrelativa = false;
-                        foreach (MateriaCursada materia in alumno._materiasCursadas)
+                        if (materia.Estado == eEstadoCursada.Aprobada && materia.Nombre == nombreMateria)
                         {
-                            if(materia.Estado == eEstadoCursada.Aprobada)
+                            throw new Exception("El alumno ya aprobó esta materia.");
+                        }
+                        if (materiaBuff.Correlativa != "Ninguna")
+                        {
+                            if ((string)materia == materiaBuff.Correlativa)
                             {
-                                throw new Exception("El alumno ya aprobó esta materia.");
-                            }
-                            if ((string)materia == materiaBuff.Nombre)
-                            {
-                                if(materia.Estado == eEstadoCursada.Aprobada)
+                                cursoCorrelativa = true;
+                                if (materia.Estado != eEstadoCursada.Aprobada)
                                 {
-                                    aproboCorrelativa = true;
+                                    throw new Exception("El alumno no aprobó la correlativa correspondiente.");
                                 }
                             }
                         }
                     }
-                    if (aproboCorrelativa == false)
+                    if (materiaBuff.Correlativa != "Ninguna" && cursoCorrelativa == false)
                     {
-                        throw new Exception("El alumno no aprobó la correlativa correspondiente.");
+                        throw new Exception("El alumno no cursó la correlativa correspondiente.");
                     }
                     alumno.PuedeInscribirse();
                     materiaBuff.Alumnos.Add(alumno);
@@ -93,8 +94,8 @@ namespace Clases
         public bool PresentarAsistencia(string? nombreMateria, eAsistencia asistencia)
         {
             MateriaCursada? materiaBuff;
-                materiaBuff = GetMateriaEnCurso(nombreMateria);
-                materiaBuff.Asistencia = asistencia;
+            materiaBuff = GetMateriaEnCurso(nombreMateria);
+            materiaBuff.Asistencia = asistencia;
 
             return true;
         }
@@ -128,7 +129,7 @@ namespace Clases
             Dictionary<string, MateriaCursada> materiasCursandoDict = new();
             foreach (MateriaCursada materia in _materiasCursadas)
             {
-                if(materia.Estado == eEstadoCursada.Cursando)
+                if (materia.Estado == eEstadoCursada.Cursando)
                 {
                     materiasCursandoDict.Add((string)materia, materia);
                 }

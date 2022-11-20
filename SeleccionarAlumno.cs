@@ -61,5 +61,10 @@ namespace alonso_nicolas_primer_parcial_labo
                 MessageBox.Show(ex.Message);
             }
         }
+
+        private void SeleccionarAlumno_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

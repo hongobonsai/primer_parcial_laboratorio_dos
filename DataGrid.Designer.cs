@@ -109,7 +109,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(754, 333);
+            this.ClientSize = new System.Drawing.Size(763, 337);
             this.Controls.Add(this.btnAceptarMat);
             this.Controls.Add(this.btnAceptarUsu);
             this.Controls.Add(this.btnAceptarAca);
