@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -9,6 +10,7 @@ using Microsoft.VisualBasic.Logging;
 using ServiceStack.Text;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using XmlSerializer = System.Xml.Serialization.XmlSerializer;
+using alonso_nicolas_primer_parcial_labo.Clases;
 
 namespace Clases
 {
@@ -17,37 +19,9 @@ namespace Clases
     /// </summary>
     public static class Funcionalidades
     {
-        public static bool ExportAlumnosDeMateriaJson(string nombreMateria, List<Alumno> alumnosList)
-        {
-            try
-            {
-                string nombreJson;
-                string nombreCarpeta = $"Alumnos_{nombreMateria}_JSON";
-                string directorioNuevo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + nombreCarpeta;
-                alumnosList = SysControl.GetAlumnosMateria(nombreMateria);
-                Directory.CreateDirectory(directorioNuevo);
-                foreach (Alumno alumno in alumnosList)
-                {
-                    Alumno alum = alumno;
-                    // --
-                    JsonSerializerOptions options = new JsonSerializerOptions();
-                    options.WriteIndented = true;
-                    // --
-                    string jsonString = JsonSerializer.Serialize(alum, options);
-
-                    nombreJson = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.json";
-                    File.WriteAllText(directorioNuevo + Path.DirectorySeparatorChar + nombreJson, jsonString);
-                }
-                MessageBox.Show($"La carpeta contenedora se creó en la ruta: \n {directorioNuevo}");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}, no se exportaron los datos.");
-            }
-            return true;
-        }
         public static bool ExportAlumnosDeMateriaXml(string nombreMateria, List<Alumno> alumnosList)
         {
+            var serializador = new SerializacionXml<Alumno>();
             try
             {
                 string nombreXml;
@@ -60,12 +34,33 @@ namespace Clases
                     Alumno alum = alumno;
                     nombreXml = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.xml";
                     // Genero el objeto de configuración de la serialización.
-                    using (StreamWriter streamWriter = new StreamWriter(directorioNuevo + Path.DirectorySeparatorChar + nombreXml))
-                    {
-                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(Alumno));
-
-                        xmlSerializer.Serialize(streamWriter, alumno);
-                    }
+                    string lastPath = directorioNuevo + Path.DirectorySeparatorChar + nombreXml;
+                    serializador.Serialize(alumno, lastPath);
+                }
+                MessageBox.Show($"La carpeta contenedora se creó en la ruta: \n {directorioNuevo}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, no se exportaron los datos.");
+            }
+            return true;
+        }
+        public static bool ExportAlumnosDeMateriaJson(string nombreMateria, List<Alumno> alumnosList)
+        {
+            var serializador = new SerializacionXml<Alumno>();
+            try
+            {
+                string nombreJson;
+                string nombreCarpeta = $"Alumnos_{nombreMateria}_JSON";
+                string directorioNuevo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + nombreCarpeta;
+                alumnosList = SysControl.GetAlumnosMateria(nombreMateria);
+                Directory.CreateDirectory(directorioNuevo);
+                foreach (Alumno alumno in alumnosList)
+                {
+                    Alumno alum = alumno;
+                    nombreJson = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.json";
+                    string pathFinal = directorioNuevo + Path.DirectorySeparatorChar + nombreJson;
+                    serializador.Serialize(alum, pathFinal);
                 }
                 MessageBox.Show($"La carpeta contenedora se creó en la ruta: \n {directorioNuevo}");
             }
@@ -77,6 +72,7 @@ namespace Clases
         }
         public static bool ExportAlumnosDeMateriaCsv(string nombreMateria, List<Alumno> alumnosList)
         {
+            var serializador = new SerializacionXml<Alumno>();
             try
             {
                 string nombreCsv;
@@ -88,11 +84,8 @@ namespace Clases
                 {
                     Alumno alum = alumno;
                     nombreCsv = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.csv";
-                    
-                    string csvString = CsvSerializer.SerializeToCsv(new[]{alumno});
-
-                    nombreCsv = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.csv";
-                    File.WriteAllText(directorioNuevo + Path.DirectorySeparatorChar + nombreCsv, csvString);
+                    string pathFinal = directorioNuevo + Path.DirectorySeparatorChar + nombreCsv;
+                    serializador.Serialize(alumno, pathFinal);
                 }
                 MessageBox.Show($"La carpeta contenedora se creó en la ruta: \n {directorioNuevo}");
             }
@@ -120,15 +113,6 @@ namespace Clases
                 }
             }
             return retorno;
-        }
-        /// <summary>
-        /// Inserta el contenido de un diccionario, en otro diccionario.
-        /// </summary>
-        public static void AppendDict<K, V>(this Dictionary<K, V> first, Dictionary<K, V> second)
-        {
-            second.ToList()
-                .ForEach(pair => first[pair.Key] = pair.Value);
-            //second.First().Were(U => U.Key == "Labo");
         }
         /// <summary>
         /// Saca el promedio entre dos notas, devuelve el resultado.
