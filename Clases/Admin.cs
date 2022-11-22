@@ -1,17 +1,28 @@
 ﻿using alonso_nicolas_primer_parcial_labo.Clases.enums;
 using Clases.enums;
+using System.Data.SqlClient;
 
 namespace Clases
 {
     public sealed class Admin : Usuario
     {
+        private static SqlConnection _sqlConnection;
+        private static SqlCommand _sqlCommand;
         /// <summary>
         /// Esta clase representa a un administrador del sistema.
         /// Hereda de Usuario
         /// </summary>
         public Admin(string? user, string? pass, eType type) : base(user, pass, type)
         {
-            //TODO HACER QUE SOLO SE PUEDA VERIFICAR QUE APRUEBE SI ESTA PRESENTE Y ETC QUE DIJO RAMPI XD
+            _sqlConnection = new SqlConnection(@"
+            Data Source = .;
+            Database = parcial_dos;
+            Trusted_Connection = True;
+        ");
+
+            _sqlCommand = new SqlCommand();
+            _sqlCommand.Connection = _sqlConnection;
+            _sqlCommand.CommandType = System.Data.CommandType.Text;
         }
         /// <summary>
         /// Valida usuario y contraseña, Instancia un Admin con los parametros recibidos, y llama al metodo "AgregarUsuario", al que le pasa el admin instanciado anteriormente.
@@ -78,36 +89,58 @@ namespace Clases
         /// <summary>
         /// Modifica la regularidad de la cursada del alumno recibido, en la materia recibida. Asigna la regularidad recibida por parametro.
         /// </summary>
-        public static void CambiarRegularidad(Alumno? alumno, MateriaCursada materia, eRegularidad regularidad)
+        public static void CambiarRegularidad(Alumno? alumno, string nombreMateria, eRegularidad regularidad)
         {
-            bool cursaMateria = false;
-            if (alumno != null && materia != null)
+            int idAlumno = 0;
+            int idMateria = 0;
+            try
             {
-                if(alumno.MateriasCursadas != null)
+                if (alumno != null && nombreMateria != "")
                 {
-                    foreach (MateriaCursada matCur in alumno.MateriasCursadas)
+                    if ((idAlumno = SysControl.GetAlumnoId(alumno.User)) == 0)
                     {
-                        if((string)matCur == (string)materia)
-                        {
-                            cursaMateria = true;
-                            matCur.Regularidad = regularidad;
-                            break;
-                        }
+                        throw new Exception($"No se pudo traer el id del alumno");
                     }
-                    if (cursaMateria == false)
+                    if ((idMateria = SysControl.GetMateriaId(nombreMateria)) == 0)
                     {
-                        throw new Exception("El alumno no cursa la materia seleccionada.");
+                        throw new Exception($"No se pudo traer el id de la materia");
                     }
+                    if (!SysControl.IsAlumnoInMateriaData(idAlumno, idMateria))
+                    {
+                        throw new Exception($"El alumno no está inscripto en esta materia");
+                    }
+                    _sqlCommand.Parameters.Clear();
+                    _sqlConnection.Open();
                 }
                 else
                 {
-                    throw new Exception("El alumno no cursa ninguna materia actualmente.");
+                    throw new Exception("Por favor, verificar los datos.");
+                }
+                _sqlCommand.CommandText = "UPDATE MateriaData SET regularidad = @regularidad WHERE idAlumno = @idAlum AND idMateria = @idMat";
+                _sqlCommand.Parameters.AddWithValue("@regularidad", regularidad);
+                _sqlCommand.Parameters.AddWithValue("@idAlum", idAlumno);
+                _sqlCommand.Parameters.AddWithValue("@idMat", idMateria);
+                if (_sqlCommand.ExecuteNonQuery() == 0)
+                {
+                    throw new Exception($"No se pudo modificar la regularidad");
                 }
             }
-            else
+            catch (Exception)
             {
-                throw new Exception("Por favor, verificar los datos.");
+                throw;
             }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
+
+
+        public static explicit operator Admin(SqlDataReader v)
+        {
+            Admin p = new Admin(v["usuario"].ToString() ?? "", v["contrasenia"].ToString() ?? "", (eType)v["tipoUsuario"]);
+
+            return p;
         }
 
     }

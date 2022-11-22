@@ -36,7 +36,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
+                SysControl.GetMateriasProfesorDict(_profesorLogueado.User);
                 AltaExamen altaExamenMenu = new(_profesorLogueado);
                 altaExamenMenu.ShowDialog();
             } catch (Exception ex)
@@ -49,7 +49,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
+                SysControl.GetMateriasProfesorDict(_profesorLogueado.User);
                 EvaluarAlumno evaluarAlumnoMenu = new(_profesorLogueado);
                 evaluarAlumnoMenu.ShowDialog();
             }
@@ -63,7 +63,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
+                SysControl.GetMateriasProfesorList(_profesorLogueado.User);
                 DataGridProfesor verMateriasProfeMenu = new(_profesorLogueado);
                 verMateriasProfeMenu.Show();
             } catch (Exception ex)

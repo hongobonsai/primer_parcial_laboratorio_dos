@@ -1,4 +1,5 @@
-﻿using Clases;
+﻿using alonso_nicolas_primer_parcial_labo.Clases;
+using Clases;
 using Clases.enums;
 using Microsoft.VisualBasic.ApplicationServices;
 using System;
@@ -31,7 +32,7 @@ namespace alonso_nicolas_primer_parcial_labo
         private void btnHcProfesor_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "pferrete";
-            txtContrasenia.Text = "quelindaslasmatematicas";
+            txtContrasenia.Text = "megustanlasmatematicas";
             cmbTipoUsuario.SelectedIndex = 1;
         }
 
@@ -70,7 +71,7 @@ namespace alonso_nicolas_primer_parcial_labo
 
             try
             {
-                usuarioLogueado = SysControl.LoginCheck(txtUsuario.Text, txtContrasenia.Text, (eType)cmbTipoUsuario.SelectedValue);
+                usuarioLogueado = SystemDao.LoginCheck(txtUsuario.Text, txtContrasenia.Text, (eType)cmbTipoUsuario.SelectedValue);
                 this.Hide();
                 //Ver clase dialog result
                 switch ((eType)cmbTipoUsuario.SelectedValue)

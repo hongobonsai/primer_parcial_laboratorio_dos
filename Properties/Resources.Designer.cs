@@ -69,5 +69,15 @@ namespace alonso_nicolas_primer_parcial_labo.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap wp2280999_orange_and_white_wallpapers {
+            get {
+                object obj = ResourceManager.GetObject("wp2280999-orange-and-white-wallpapers", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }

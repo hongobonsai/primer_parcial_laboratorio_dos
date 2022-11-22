@@ -38,16 +38,21 @@ namespace alonso_nicolas_primer_parcial_labo
 
         private void btnAsistencia_Click(object sender, EventArgs e)
         {
+            int idAlumno;
             try
             {
-                if (_alumnoLogueado.EstaCursandoAlgo())
+                if ((idAlumno = SysControl.GetAlumnoId(_alumnoLogueado.User)) == 0)
+                {
+                    throw new Exception($"No se pudo traer el id del alumno");
+                }
+                if (SysControl.EstaCursandoAlumno(idAlumno))
                 {
                     PresentarAsistencia asistenciaMenu = new(_alumnoLogueado);
                     asistenciaMenu.ShowDialog();
                 }
                 else
                 {
-                    throw new Exception("No estas inscripto en ninguna materia.");
+                    throw new Exception("No esta inscripto en ninguna materia.");
                 }
             }
             catch (Exception ex)
@@ -58,16 +63,21 @@ namespace alonso_nicolas_primer_parcial_labo
 
         private void button4_Click(object sender, EventArgs e)
         {
+            int idAlumno;
             try
             {
-                if (_alumnoLogueado.EstaCursandoAlgo())
+                if ((idAlumno = SysControl.GetAlumnoId(_alumnoLogueado.User)) == 0)
+                {
+                    throw new Exception($"No se pudo traer el id del alumno");
+                }
+                if (SysControl.EstaCursandoAlumno(idAlumno))
                 {
                     DataGridAlumno verMateriasAluMenu = new(_alumnoLogueado);
                     verMateriasAluMenu.ShowDialog();
                 }
                 else
                 {
-                    throw new Exception("No estas inscripto en ninguna materia.");
+                    throw new Exception("No esta inscripto en ninguna materia.");
                 }
             }
             catch (Exception ex)

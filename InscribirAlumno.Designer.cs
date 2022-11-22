@@ -79,7 +79,7 @@
             this.BtnInscribirAlumno.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.BtnInscribirAlumno.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
             this.BtnInscribirAlumno.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
-            this.BtnInscribirAlumno.Location = new System.Drawing.Point(56, 174);
+            this.BtnInscribirAlumno.Location = new System.Drawing.Point(56, 196);
             this.BtnInscribirAlumno.Name = "BtnInscribirAlumno";
             this.BtnInscribirAlumno.Size = new System.Drawing.Size(231, 39);
             this.BtnInscribirAlumno.TabIndex = 20;
@@ -91,7 +91,7 @@
             // 
             this.lblError.AutoSize = true;
             this.lblError.BackColor = System.Drawing.Color.Transparent;
-            this.lblError.Location = new System.Drawing.Point(56, 156);
+            this.lblError.Location = new System.Drawing.Point(56, 176);
             this.lblError.Name = "lblError";
             this.lblError.Size = new System.Drawing.Size(81, 15);
             this.lblError.TabIndex = 21;
@@ -114,7 +114,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(342, 249);
+            this.ClientSize = new System.Drawing.Size(342, 269);
             this.Controls.Add(this.lblMateria);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.BtnInscribirAlumno);

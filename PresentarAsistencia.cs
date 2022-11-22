@@ -33,7 +33,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                _alumnoLogueado.PresentarAsistencia(cmbMateria.Text, (eAsistencia)cmbAsistencia.SelectedValue);
+                Alumno.PresentarAsistencia(_alumnoLogueado.User, cmbMateria.Text, (eAsistencia)cmbAsistencia.SelectedValue);
                 MessageBox.Show($"Se presentó asistencia a la materia {cmbMateria.Text}.");
                 this.Close();
             }

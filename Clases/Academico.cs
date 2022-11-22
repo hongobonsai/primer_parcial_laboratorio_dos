@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -21,6 +22,10 @@ namespace Clases
         private int _dni;
         private DateTime? _nacimiento;
         private eGenero _genero;
+        public Academico()
+        {
+
+        }
         public Academico(string? user, string? pass, eType type, string? nombre, string? apellido, int dni, DateTime nacimiento, eGenero genero) : base(user, pass, type)
         {
             _nombre = nombre;
@@ -69,7 +74,7 @@ namespace Clases
             {
                 if (int.TryParse(dniStr, out dni))
                 {
-                    if (dni > 0 && dni <= 99999999)
+                    if (dni > 999 && dni <= 99999999)
                     {
                         if (type == eType.Profesor || type == eType.Alumno && (genero == eGenero.Masculino || genero == eGenero.Femenino || genero == eGenero.Otro))
                         {

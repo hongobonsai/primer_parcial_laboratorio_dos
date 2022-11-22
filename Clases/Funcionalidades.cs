@@ -2,7 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
+using Microsoft.VisualBasic.Logging;
+using ServiceStack.Text;
+using JsonSerializer = System.Text.Json.JsonSerializer;
+using XmlSerializer = System.Xml.Serialization.XmlSerializer;
 
 namespace Clases
 {
@@ -11,6 +17,91 @@ namespace Clases
     /// </summary>
     public static class Funcionalidades
     {
+        public static bool ExportAlumnosDeMateriaJson(string nombreMateria, List<Alumno> alumnosList)
+        {
+            try
+            {
+                string nombreJson;
+                string nombreCarpeta = $"Alumnos_{nombreMateria}_JSON";
+                string directorioNuevo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + nombreCarpeta;
+                alumnosList = SysControl.GetAlumnosMateria(nombreMateria);
+                Directory.CreateDirectory(directorioNuevo);
+                foreach (Alumno alumno in alumnosList)
+                {
+                    Alumno alum = alumno;
+                    // --
+                    JsonSerializerOptions options = new JsonSerializerOptions();
+                    options.WriteIndented = true;
+                    // --
+                    string jsonString = JsonSerializer.Serialize(alum, options);
+
+                    nombreJson = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.json";
+                    File.WriteAllText(directorioNuevo + Path.DirectorySeparatorChar + nombreJson, jsonString);
+                }
+                MessageBox.Show($"La carpeta contenedora se creó en la ruta: \n {directorioNuevo}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, no se exportaron los datos.");
+            }
+            return true;
+        }
+        public static bool ExportAlumnosDeMateriaXml(string nombreMateria, List<Alumno> alumnosList)
+        {
+            try
+            {
+                string nombreXml;
+                string nombreCarpeta = $"Alumnos_{nombreMateria}_XML";
+                string directorioNuevo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + nombreCarpeta;
+                alumnosList = SysControl.GetAlumnosMateria(nombreMateria);
+                Directory.CreateDirectory(directorioNuevo);
+                foreach (Alumno alumno in alumnosList)
+                {
+                    Alumno alum = alumno;
+                    nombreXml = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.xml";
+                    // Genero el objeto de configuración de la serialización.
+                    using (StreamWriter streamWriter = new StreamWriter(directorioNuevo + Path.DirectorySeparatorChar + nombreXml))
+                    {
+                        XmlSerializer xmlSerializer = new XmlSerializer(typeof(Alumno));
+
+                        xmlSerializer.Serialize(streamWriter, alumno);
+                    }
+                }
+                MessageBox.Show($"La carpeta contenedora se creó en la ruta: \n {directorioNuevo}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, no se exportaron los datos.");
+            }
+            return true;
+        }
+        public static bool ExportAlumnosDeMateriaCsv(string nombreMateria, List<Alumno> alumnosList)
+        {
+            try
+            {
+                string nombreCsv;
+                string nombreCarpeta = $"Alumnos_{nombreMateria}_CSV";
+                string directorioNuevo = Directory.GetCurrentDirectory() + Path.DirectorySeparatorChar + nombreCarpeta;
+                alumnosList = SysControl.GetAlumnosMateria(nombreMateria);
+                Directory.CreateDirectory(directorioNuevo);
+                foreach (Alumno alumno in alumnosList)
+                {
+                    Alumno alum = alumno;
+                    nombreCsv = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.csv";
+                    
+                    string csvString = CsvSerializer.SerializeToCsv(new[]{alumno});
+
+                    nombreCsv = "Alumno_" + $"{alumno.User}_" + $"{alumno.Nombre}_" + $"{alumno.Apellido}.csv";
+                    File.WriteAllText(directorioNuevo + Path.DirectorySeparatorChar + nombreCsv, csvString);
+                }
+                MessageBox.Show($"La carpeta contenedora se creó en la ruta: \n {directorioNuevo}");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}, no se exportaron los datos.");
+            }
+            return true;
+        }
         /// <summary>
         /// Verifica que la cadena recibida esté compuesta solo por letras del alfabeto
         /// </summary>

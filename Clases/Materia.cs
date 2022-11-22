@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,9 +52,11 @@ namespace Clases
         /// <summary>
         /// Devuelve la lista de alumnos que cursan la materia.
         /// </summary>
-        public List<Alumno> GetAlumnosList()
+        public static explicit operator Materia(SqlDataReader v)
         {
-            return _alumnos;
+            Materia p = new Materia(v["nombre"].ToString() ?? "", (eCuatrimestre)v["cuatrimestre"], v["correlativa"].ToString());
+
+            return p;
         }
     }
 }

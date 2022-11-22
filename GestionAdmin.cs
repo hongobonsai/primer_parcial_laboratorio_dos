@@ -65,5 +65,11 @@ namespace alonso_nicolas_primer_parcial_labo
             SeleccionarAlumno SeleccionMenu = new();
             SeleccionMenu.ShowDialog();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ExportarDatos exportarMenu = new();
+            exportarMenu.ShowDialog();
+        }
     }
 }

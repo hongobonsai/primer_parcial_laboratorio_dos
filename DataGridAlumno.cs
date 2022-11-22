@@ -26,7 +26,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                _materiasList = _alumnoLogueado.GetMateriasList();
+                _materiasList = SysControl.GetMateriasAlumnoList(_alumnoLogueado.User);
                 bindingSource.DataSource = _materiasList;
                 dgvMateriasAlumno.DataSource = bindingSource;
             }

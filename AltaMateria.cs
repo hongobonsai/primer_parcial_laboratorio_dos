@@ -43,15 +43,19 @@ namespace alonso_nicolas_primer_parcial_labo
             Materia? materiaBuff;
             try
             {
-                materiaBuff = Profesor.NewMateria(txtNombre.Text, SysControl.GetCuatrimestre(cmbCuatrimestre.SelectedItem.ToString()));
                 if (cmbAgregarCorrelativa.Enabled)
                 {
-                    SysControl.AsignarCorrelativa(materiaBuff, cmbAgregarCorrelativa.Text);
+                    materiaBuff = Profesor.NewMateria(txtNombre.Text, SysControl.GetCuatrimestre(cmbCuatrimestre.SelectedItem.ToString()), cmbAgregarCorrelativa.Text);
+                }
+                else
+                {
+                    materiaBuff = Profesor.NewMateria(txtNombre.Text, SysControl.GetCuatrimestre(cmbCuatrimestre.SelectedItem.ToString()), "Ninguna");
                 }
                 if (cmbAgregarProfesor.Enabled)
                 {
-                    Profesor? profesorBuff = SysControl.AsignarProfesor(materiaBuff, cmbAgregarProfesor.Text);
-                    profesorBuff.MateriasAsignadas.Add(materiaBuff.Nombre);
+                    SysControl.AsignarProfesor(materiaBuff, cmbAgregarProfesor.Text);
+                    //Profesor? profesorBuff = SysControl.AsignarProfesor(materiaBuff, cmbAgregarProfesor.Text);
+                    //profesorBuff.MateriasAsignadas.Add(materiaBuff.Nombre);
                 }
                 MessageBox.Show($"La materia {txtNombre.Text} se creó correctamente.");
                 this.Close();

@@ -41,6 +41,7 @@
             this.btnInscribirAlumno = new System.Windows.Forms.Button();
             this.picUtn = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.GpbAdministracionMaterias.SuspendLayout();
             this.GpbAdministracionUsuarios.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picUtn)).BeginInit();
@@ -207,9 +208,9 @@
             this.picUtn.BackColor = System.Drawing.Color.Transparent;
             this.picUtn.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picUtn.BackgroundImage")));
             this.picUtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.picUtn.Location = new System.Drawing.Point(27, 336);
+            this.picUtn.Location = new System.Drawing.Point(27, 355);
             this.picUtn.Name = "picUtn";
-            this.picUtn.Size = new System.Drawing.Size(181, 77);
+            this.picUtn.Size = new System.Drawing.Size(138, 42);
             this.picUtn.TabIndex = 42;
             this.picUtn.TabStop = false;
             // 
@@ -228,6 +229,22 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Administración de alumnos";
             // 
+            // button1
+            // 
+            this.button1.BackgroundImage = global::alonso_nicolas_primer_parcial_labo.Properties.Resources.Sin_título;
+            this.button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(123)))), ((int)(((byte)(52)))), ((int)(((byte)(34)))));
+            this.button1.Location = new System.Drawing.Point(185, 355);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(157, 42);
+            this.button1.TabIndex = 43;
+            this.button1.Text = "Exportar Datos";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // GestionAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -235,6 +252,7 @@
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(717, 413);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.picUtn);
             this.Controls.Add(this.GpbAdministracionMaterias);
@@ -272,5 +290,6 @@
         private Button btnInscribirAlumno;
         private PictureBox picUtn;
         private GroupBox groupBox1;
+        private Button button1;
     }
 }

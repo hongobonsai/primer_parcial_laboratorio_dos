@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using alonso_nicolas_primer_parcial_labo.Clases.enums;
+using Clases.enums;
 
 namespace Clases
 {
@@ -32,6 +34,10 @@ namespace Clases
             _notaSegundoParcial = notaSegundoParcial;
             _asistencia = asistencia;
         }
+        public MateriaCursada(string nombre, int notaPrimerParcial, int notaSegundoParcial, int notaFinal, eAsistencia asistencia, eRegularidad regularidad, eEstadoCursada estado) : this(nombre, notaPrimerParcial, notaSegundoParcial, asistencia, regularidad, estado)
+        {
+            _notaFinal = notaFinal;
+        }
         public string Nombre { get => _nombre; set => _nombre = value; }
         public int NotaPrimerParcial { get => _notaPrimerParcial; set => _notaPrimerParcial = value; }
         public int NotaSegundoParcial { get => _notaSegundoParcial; set => _notaSegundoParcial = value; }
@@ -44,6 +50,28 @@ namespace Clases
         {
             return materia.Nombre;
         }
+        public static explicit operator MateriaCursada(SqlDataReader v)
+        {
+            MateriaCursada p;
+            if (v["notaPrimerParcial"] is DBNull || v["notaSegundoParcial"] is DBNull || v["promedio"] is DBNull)
+            {
+                p = new MateriaCursada(v["nombre"].ToString() ?? "", 0, 0, 0, 
+                    (eAsistencia)v["asistencia"], (eRegularidad)v["regularidad"], (eEstadoCursada)v["estado"]);
+            } else
+            {
+                p = new MateriaCursada(v["nombre"].ToString() ?? "", Convert.ToInt32(v["notaPrimerParcial"]), Convert.ToInt32(v["notaSegundoParcial"]),
+                Convert.ToInt32(v["promedio"]), (eAsistencia)v["asistencia"], (eRegularidad)v["regularidad"], (eEstadoCursada)v["estado"]);
+            }
+
+            return p;
+        }
 
     }
+    //private string _nombre;
+    //private int _notaPrimerParcial;
+    //private int _notaSegundoParcial;
+    //private int _notaFinal;
+    //private eRegularidad _regularidad;
+    //private eAsistencia _asistencia;
+    //private eEstadoCursada _estado;
 }

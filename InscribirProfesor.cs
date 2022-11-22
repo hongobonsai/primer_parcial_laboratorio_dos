@@ -41,11 +41,11 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                SysControl.GetProfesor(cmbAgregarProfesor.Text);
                 Materia? materiaBuff = SysControl.GetMateria(cmbMateria.Text);
-                Profesor? profesorBuff = SysControl.AsignarProfesor(materiaBuff, cmbAgregarProfesor.Text);
-                profesorBuff.MateriasAsignadas.Add(materiaBuff.Nombre);
-                MessageBox.Show($"El profesor {profesorBuff.User} se agrego a la materia {materiaBuff.Nombre}.");
+                SysControl.AsignarProfesor(materiaBuff, cmbAgregarProfesor.Text);
+                //Profesor? profesorBuff = SysControl.AsignarProfesor(materiaBuff, cmbAgregarProfesor.Text);
+                //profesorBuff.MateriasAsignadas.Add(materiaBuff.Nombre);
+                MessageBox.Show($"El profesor {cmbAgregarProfesor.Text} se agrego a la materia {materiaBuff.Nombre}.");
                 this.Close();
             }
             catch(Exception ex)

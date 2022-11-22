@@ -27,7 +27,7 @@ namespace alonso_nicolas_primer_parcial_labo
 
         private void DataGridExamenes_Load(object sender, EventArgs e)
         {
-            _listaExamenes = _profesorLogueado.GetExamenesMateria(_materia.Nombre);
+            _listaExamenes = Profesor.GetExamenesMateria(_materia.Nombre, _profesorLogueado.User);
             bindingSource.DataSource = _listaExamenes;
             dgvExamenesProfesor.DataSource = bindingSource;
             lblCargados.Text = "Examenes de la materia: " + $"{_materia.Nombre}:"; ;

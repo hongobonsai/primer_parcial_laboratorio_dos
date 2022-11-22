@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +20,7 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             InitializeComponent();
             _profesor = profesor;
-            _materiasDict = SysControl.GetMateriasProfesor(_profesor.Dni);
+            _materiasDict = SysControl.GetMateriasProfesorDict(_profesor.User);
         }
 
         private void AltaExamen_Load(object sender, EventArgs e)
@@ -30,23 +31,9 @@ namespace alonso_nicolas_primer_parcial_labo
         private void btnMostrarMaterias_Click(object sender, EventArgs e)
         {
             StringBuilder sb = new();
-            Dictionary<string, Materia?> materiasDict = new();
-            materiasDict = SysControl.GetMateriasProfesor(_profesor.Dni);
+            Dictionary<string, Materia> materiasDict = new();
+            materiasDict = SysControl.GetMateriasProfesorDict(_profesor.User);
             DataGrid datagrid = new("materia");
-            foreach (KeyValuePair<string, Materia> materia in materiasDict)
-            {
-
-                sb.AppendLine($"Nombre: {materia.Value.Nombre}");
-                sb.AppendLine($"Cuatri: {materia.Value.Cuatrimestre}");
-                sb.AppendLine($"Correlativa: {materia.Value.Correlativa}");
-                sb.AppendLine($"Profesores: ");
-                foreach (Profesor profesor in materia.Value.Profesores)
-                {
-                    sb.AppendLine($"{profesor.Nombre}" + $" {profesor.Apellido}");
-                }
-                sb.AppendLine($"");
-            }
-            MessageBox.Show($"{sb}");
             datagrid.Show();
         }
 
@@ -55,7 +42,7 @@ namespace alonso_nicolas_primer_parcial_labo
             Examen? examenBuff;
             try
             {
-                examenBuff = _profesor.NewExamen(txtNombre.Text, cmbMateria.Text.ToString(), dtpFecha.Value);
+                Profesor.AgregarExamen(txtNombre.Text, cmbMateria.Text.ToString(), dtpFecha.Value, _profesor.User);
                 MessageBox.Show($"El examen {txtNombre.Text} se creó correctamente.");
                 this.Close();
             }

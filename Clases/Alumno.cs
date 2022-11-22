@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,193 +16,187 @@ namespace Clases
     /// </summary>
     public sealed class Alumno : Academico
     {
-        private List<MateriaCursada>? _materiasCursadas;
+        private static SqlConnection _sqlConnection;
+        private static SqlCommand _sqlCommand;
+        public Alumno()
+        {
 
+        }
         public Alumno(string? user, string? pass, eType type, string? nombre, string? apellido, int dni,
             DateTime nacimiento, eGenero genero) : base(user, pass, type, nombre, apellido, dni, nacimiento, genero)
         {
-            _materiasCursadas = new();
-        }
-        public List<MateriaCursada>? MateriasCursadas
-        {
-            get { return _materiasCursadas; }
-            set { _materiasCursadas = value; }
+            _sqlConnection = new SqlConnection(@"
+                    Data Source = .;
+                    Database = parcial_dos;
+                    Trusted_Connection = True;
+                    ");
+
+            _sqlCommand = new SqlCommand();
+            _sqlCommand.Connection = _sqlConnection;
+            _sqlCommand.CommandType = System.Data.CommandType.Text;
         }
         /// <summary>
         /// Inscribe a un alumno en la materia obtenida a partir del nombre recibido por parametro.
         /// Busca la materia correspondiente en la lista de materias, y en caso que el alumno cumpla las condiciones (tenga aprobada la correlativa y no la este cursando/ya la haya aprobado), lo agrega a la lista.
         /// </summary>
-        public static MateriaCursada? InscribirseMateria(string? nombreMateria, Alumno alumno)
+        public static bool? InscribirseMateria(string? nombreMateria, Alumno alumno)
         {
-            MateriaCursada retorno = null;
-            Materia? materiaBuff;
-            MateriaCursada materiaInscribirse;
-            bool cursoCorrelativa = false;
-            if (nombreMateria != "")
+            // crear materiadata
+            bool retorno = false;
+
+            int idAlumno;
+            int idMateria;
+            Materia materiaBuff = SysControl.GetMateria(nombreMateria);
+            if (nombreMateria != "" && alumno != null)
             {
                 try
                 {
-                    materiaBuff = SysControl.GetMateria(nombreMateria);
-                    foreach (Alumno alum in materiaBuff.Alumnos)
+                    if ((idAlumno = SysControl.GetAlumnoId(alumno.User)) == 0)
                     {
-                        if (alum.User == alumno.User)
+                        throw new Exception($"No se pudo traer el id del alumno");
+                    }
+                    if ((idMateria = SysControl.GetMateriaId(nombreMateria)) == 0)
+                    {
+                        throw new Exception($"No se pudo traer el id de la materia");
+                    }
+                    if (SysControl.IsAlumnoInMateriaData(idAlumno, idMateria))
+                    {
+                        throw new Exception($"El alumno ya está inscripto");
+                    }
+                    if (SysControl.AproboLaMateria(idAlumno, idMateria))
+                    {
+                        throw new Exception($"El alumno ya aprobó la materia");
+                    }
+                    if (materiaBuff.Correlativa != "Ninguna")
+                    {
+                        if (!SysControl.AproboCorrelativa(idAlumno, materiaBuff.Correlativa))
                         {
-                            throw new Exception("El alumno ya está inscripto a la materia.");
+                            throw new Exception($"El alumno no aprobó la correlativa correspondiente");
                         }
                     }
-                    foreach (MateriaCursada materia in alumno._materiasCursadas)
+                    PuedeInscribirse(idAlumno);
+
+                    _sqlCommand.Parameters.Clear();
+                    _sqlConnection.Open();
+
+                    _sqlCommand.CommandText = "INSERT INTO MateriaData (regularidad, asistencia, estado, nombre, idAlumno, idMateria) " +
+                        "VALUES(@regu, @asist, @estado, @nombre, @idAlum, @idMat)";
+                    _sqlCommand.Parameters.AddWithValue("@regu", eRegularidad.Regular);
+                    _sqlCommand.Parameters.AddWithValue("@asist", eAsistencia.Ausente);
+                    _sqlCommand.Parameters.AddWithValue("@estado", eEstadoCursada.Cursando);
+                    _sqlCommand.Parameters.AddWithValue("@nombre", nombreMateria);
+                    _sqlCommand.Parameters.AddWithValue("@idAlum", idAlumno);
+                    _sqlCommand.Parameters.AddWithValue("@idMat", idMateria);
+                    if (_sqlCommand.Parameters.Count < 6)
                     {
-                        if (materia.Estado == eEstadoCursada.Aprobada && materia.Nombre == nombreMateria)
-                        {
-                            throw new Exception("El alumno ya aprobó esta materia.");
-                        }
-                        if (materiaBuff.Correlativa != "Ninguna")
-                        {
-                            if ((string)materia == materiaBuff.Correlativa)
-                            {
-                                cursoCorrelativa = true;
-                                if (materia.Estado != eEstadoCursada.Aprobada)
-                                {
-                                    throw new Exception("El alumno no aprobó la correlativa correspondiente.");
-                                }
-                            }
-                        }
+                        throw new Exception($"No se pudo asignar el alumno {alumno.User} a {nombreMateria}");
                     }
-                    if (materiaBuff.Correlativa != "Ninguna" && cursoCorrelativa == false)
-                    {
-                        throw new Exception("El alumno no cursó la correlativa correspondiente.");
-                    }
-                    alumno.PuedeInscribirse();
-                    materiaBuff.Alumnos.Add(alumno);
-                    materiaInscribirse = new(nombreMateria, eRegularidad.Regular, eEstadoCursada.Cursando);
-                    alumno.MateriasCursadas.Add(materiaInscribirse);
-                    retorno = materiaInscribirse;
+                    _sqlCommand.ExecuteNonQuery();
+                    retorno = true;
                 }
                 catch (Exception ex)
                 {
                     throw new Exception($"{ex.Message}");
                 }
-
+                finally
+                {
+                    _sqlConnection.Close();
+                }
             }
             else
             {
-                throw new Exception("Verificar el campo materia.");
+                throw new Exception("Verificar los campos ingresados");
             }
             return retorno;
         }
-        /// <summary>
-        /// Carga la asistencia recibida por parametro en el atributo _asistencia de la Materia Cursada del alumno.
-        /// </summary>
-        public bool PresentarAsistencia(string? nombreMateria, eAsistencia asistencia)
+            /// <summary>
+            /// Carga la asistencia recibida por parametro en el atributo _asistencia de la Materia Cursada del alumno.
+            /// </summary>
+        public static void PresentarAsistencia(string nombreUsuario, string? nombreMateria, eAsistencia asistencia)
         {
-            MateriaCursada? materiaBuff;
-            materiaBuff = GetMateriaEnCurso(nombreMateria);
-            materiaBuff.Asistencia = asistencia;
-
-            return true;
-        }
-        /// <summary>
-        /// Obtiene la materia EN CURSO a partir del nombre recibido por parametro. Si la materia no está en curso, lanza una excepcion.
-        /// </summary>
-        public MateriaCursada? GetMateriaEnCurso(string? nombreMateria)
-        {
-            MateriaCursada? materiaCursada = null;
-            foreach (MateriaCursada? materia in _materiasCursadas)
+            int idAlumno;
+            int idMateria;
+            try
             {
-                if (materia.Estado == eEstadoCursada.Cursando)
+                if (nombreUsuario != "" && nombreMateria != "")
                 {
-                    if ((string)materia == nombreMateria)
+                    if ((idAlumno = SysControl.GetAlumnoId(nombreUsuario)) == 0)
                     {
-                        materiaCursada = materia;
+                        throw new Exception($"No se pudo traer el id del alumno");
                     }
+                    if ((idMateria = SysControl.GetMateriaId(nombreMateria)) == 0)
+                    {
+                        throw new Exception($"No se pudo traer el id de la materia");
+                    }
+                    if (!SysControl.IsAlumnoInMateriaData(idAlumno, idMateria))
+                    {
+                        throw new Exception($"El alumno no está inscripto en esta materia");
+                    }
+                    _sqlCommand.Parameters.Clear();
+                    _sqlConnection.Open();
                 }
-            }
-            if (materiaCursada == null)
-            {
-                throw (new Exception("El alumno no se encuentra cursando esta materia."));
-            }
-            return materiaCursada;
-        }
-        /// <summary>
-        /// Devuelve un diccionario con todas las materias EN CURSO del alumno.
-        /// </summary>
-        public Dictionary<string, MateriaCursada> GetMateriasEnCurso()
-        {
-            Dictionary<string, MateriaCursada> materiasCursandoDict = new();
-            foreach (MateriaCursada materia in _materiasCursadas)
-            {
-                if (materia.Estado == eEstadoCursada.Cursando)
+                else
                 {
-                    materiasCursandoDict.Add((string)materia, materia);
+                    throw new Exception("Por favor, verificar los datos.");
                 }
-            }
-            return materiasCursandoDict;
-        }
-        /// <summary>
-        /// Devuelve una lista con todas las materias EN CURSO del alumno.
-        /// </summary>
-        public List<MateriaCursada> GetMateriasEnCursoList()
-        {
-            List<MateriaCursada> materiasCursando = new();
-            foreach (MateriaCursada materia in _materiasCursadas)
-            {
-                if (materia.Estado == eEstadoCursada.Cursando)
+                _sqlCommand.CommandText = "UPDATE MateriaData SET asistencia = @asist WHERE idAlumno = @idAlum AND idMateria = @idMat";
+                _sqlCommand.Parameters.AddWithValue("@asist", asistencia);
+                _sqlCommand.Parameters.AddWithValue("@idAlum", idAlumno);
+                _sqlCommand.Parameters.AddWithValue("@idMat", idMateria);
+                if (_sqlCommand.ExecuteNonQuery() == 0)
                 {
-                    materiasCursando.Add(materia);
+                    throw new Exception($"No se pudo modificar la asistencia");
                 }
             }
-            return materiasCursando;
-        }
-        /// <summary>
-        /// Devuelve un diccionario con todas las materias cursadas por el alumno
-        /// </summary>
-        public Dictionary<string, MateriaCursada> GetMaterias()
-        {
-            Dictionary<string, MateriaCursada> materiasCursandoDict = new();
-            foreach (MateriaCursada materia in _materiasCursadas)
+            catch (Exception)
             {
-                materiasCursandoDict.Add((string)materia, materia);
+                throw;
             }
-            return materiasCursandoDict;
-        }
-        /// <summary>
-        /// Devuelve una lista de materias con todas las materias cursadas por el alumno.
-        /// </summary>
-        public List<MateriaCursada> GetMateriasList()
-        {
-            return _materiasCursadas;
-        }
-        /// <summary>
-        /// Devuelve true o false dependiendo si el alumno esta actualmente cursando alguna materia.
-        /// </summary>
-        /// <returns>
-        /// True = Esta cursando alguna materia, False = No esta cursando ninguna materia
-        /// </returns>
-        public bool EstaCursandoAlgo()
-        {
-            if (_materiasCursadas.Count == 0)
+            finally
             {
-                return false;
+                _sqlConnection.Close();
             }
-            return true;
         }
         /// <summary>
         /// Verifica si el alumno ya está anotado en el máximo de materias posibles. De ser así, lanza excepción.
         /// </summary>
-        public void PuedeInscribirse()
+        public static void PuedeInscribirse(int idAlumno)
         {
-            int materiasCursadasCount = 0;
-            foreach (MateriaCursada materia in _materiasCursadas)
+            int CountCursadas = 0;
+            try
             {
-                if (materia.Estado == eEstadoCursada.Cursando)
+                _sqlCommand.Parameters.Clear();
+                _sqlCommand.CommandText = "SELECT COUNT(*) MateriasCursadas FROM MateriaData WHERE idAlumno " +
+                    "= @idAlum AND estado = 2";
+                _sqlCommand.Parameters.AddWithValue("@idAlum", idAlumno);
+                _sqlConnection.Open();
+                SqlDataReader reader = _sqlCommand.ExecuteReader();
+                reader.Read();
+                CountCursadas = int.Parse(reader["MateriasCursadas"].ToString());
+                if(CountCursadas >= 2)
                 {
-                    materiasCursadasCount++;
+                    throw new Exception($"El alumno ya está cursando el máximo de materias");
                 }
             }
-            if (materiasCursadasCount >= 2)
+            catch (Exception)
             {
-                throw new Exception("El alumno ya está cursando el maximo de materias");
+                throw;
             }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+        }
+        public static explicit operator Alumno(SqlDataReader v)
+        {
+            Alumno p = new Alumno
+                (
+                v["usuario"].ToString() ?? "", v["contrasenia"].ToString() ?? "", (eType)v["tipoUsuario"],
+                v["nombre"].ToString() ?? "", v["apellido"].ToString() ?? "", Convert.ToInt32(v["dni"]),
+                (DateTime)v["fechaNacimiento"], (eGenero)v["genero"]
+                );
+
+            return p;
         }
     }
 }

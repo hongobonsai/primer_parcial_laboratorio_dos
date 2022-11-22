@@ -28,8 +28,8 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                _materiasDict = SysControl.GetMateriasProfesor(_profesorLogueado.Dni);
-                _materiasList = SysControl.GetMateriasProfesorList(_profesorLogueado.Dni);
+                _materiasDict = SysControl.GetMateriasProfesorDict(_profesorLogueado.User);
+                _materiasList = SysControl.GetMateriasProfesorList(_profesorLogueado.User);
                 bindingSource.DataSource = _materiasList;
                 dgvMateriasProfe.DataSource = bindingSource;
                 cmbMateria.DataSource = _materiasDict.ToList(); cmbMateria.DisplayMember = "Key";
@@ -44,15 +44,9 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-               if((SysControl.GetMateria(cmbMateria.Text)).GetAlumnosList().Count != 0)
-                {
-                    DataGridListaAlumnos listaAlumnosDvg = new(SysControl.GetMateria(cmbMateria.Text));
-                    listaAlumnosDvg.ShowDialog();
-                }
-                else
-                {
-                    throw new Exception("La materia seleccionada no tiene alumnos inscriptos.");
-                }
+                Profesor.GetAlumnosMateriaProfesor(cmbMateria.Text, _profesorLogueado.User);
+                 DataGridListaAlumnos listaAlumnosDvg = new(cmbMateria.Text, _profesorLogueado.User);
+                 listaAlumnosDvg.ShowDialog();
             }
             catch(Exception ex)
             {
@@ -64,15 +58,10 @@ namespace alonso_nicolas_primer_parcial_labo
         {
             try
             {
-                if (_profesorLogueado.GetExamenesMateria(cmbMateria.Text).Count != 0)
-                {
-                    DataGridExamenes listaExamenesDvg = new(SysControl.GetMateria(cmbMateria.Text), _profesorLogueado);
-                    listaExamenesDvg.ShowDialog();
-                }
-                else
-                {
-                    throw new Exception("La materia seleccionada no tiene examenes.");
-                }
+                Profesor.GetExamenesMateria(cmbMateria.Text, _profesorLogueado.User);
+                
+                DataGridExamenes listaExamenesDvg = new(SysControl.GetMateria(cmbMateria.Text), _profesorLogueado);
+                listaExamenesDvg.ShowDialog();
             }
             catch (Exception ex)
             {

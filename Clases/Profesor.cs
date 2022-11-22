@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using alonso_nicolas_primer_parcial_labo.Clases.enums;
 using Clases.enums;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace Clases
 {
@@ -14,6 +17,8 @@ namespace Clases
     /// </summary>
     public sealed class Profesor : Academico
     {
+        private static SqlConnection _sqlConnection;
+        private static SqlCommand _sqlCommand;
         private List<string?> _materiasAsignadas;
         private List<Examen> _examenes;
 
@@ -21,6 +26,15 @@ namespace Clases
         {
             _materiasAsignadas = new List<string?>();
             _examenes = new List<Examen>();
+            _sqlConnection = new SqlConnection(@"
+            Data Source = .;
+            Database = parcial_dos;
+            Trusted_Connection = True;
+        ");
+
+            _sqlCommand = new SqlCommand();
+            _sqlCommand.Connection = _sqlConnection;
+            _sqlCommand.CommandType = System.Data.CommandType.Text;
         }
         public Profesor(string? user, string? pass, eType type, string? nombre, string? apellido, int dni, DateTime nacimiento, eGenero genero, List<string?> materiasAsignadas) : this (user, pass, type, nombre, apellido, dni, nacimiento, genero)
         {
@@ -31,14 +45,14 @@ namespace Clases
         /// <summary>
         /// Valida que exista el nombre de materia recibido, Instancia una materia con los parametros recibidos, y llama al metodo "AgregarMateria", al que le pasa la materia instanciada anteriormente.
         /// </summary>
-        public static Materia? NewMateria(string nombre, eCuatrimestre cuatrimestre)
+        public static Materia? NewMateria(string nombre, eCuatrimestre cuatrimestre, string correlativa)
         {
             Materia? retorno;
             if (nombre != "")
             {
                 if (SysControl.ExistMateria(nombre) != true)
                 {
-                    Materia materia = new(nombre, cuatrimestre);
+                    Materia materia = new(nombre, cuatrimestre, correlativa);
                     SysControl.AgregarMateria(materia);
                     retorno = materia;
                 }
@@ -85,82 +99,159 @@ namespace Clases
                 throw new Exception("Completar los campos requeridos.");
             }
             return retorno;
+        }        
+        /// <summary>
+        /// Crea y agrega un examen
+        /// </summary>
+        public static bool AgregarExamen(string nombre, string materia, DateTime fecha, string userProfesor)
+        {
+            bool retorno = false;
+            int idProfesor;
+            if (materia != "" && nombre != "" && fecha != null)
+            {
+                try
+                {
+                    if ((idProfesor = SysControl.GetProfesorId(userProfesor)) == 0)
+                    {
+                        throw new Exception($"No se pudo traer el id del profesor");
+                    }
+                    _sqlCommand.Parameters.Clear();
+                    _sqlConnection.Open();
+
+                    _sqlCommand.CommandText = "INSERT INTO Examenes (nombre, nombreMateria, fecha, profesorId) " +
+                        "VALUES(@nombreExam, @nombreMat, @fech, @profId)";
+                    _sqlCommand.Parameters.AddWithValue("@nombreExam", nombre);
+                    _sqlCommand.Parameters.AddWithValue("@nombreMat", materia);
+                    _sqlCommand.Parameters.AddWithValue("@fech", fecha);
+                    _sqlCommand.Parameters.AddWithValue("@profId", idProfesor);
+                    if (_sqlCommand.ExecuteNonQuery() == 0)
+                    {
+                        throw new Exception($"No se pudo agregar el examen {nombre}");
+                    }
+                    retorno = true;
+                }
+                catch (Exception)
+                {
+                    throw;
+                }
+                finally
+                {
+                    _sqlConnection.Close();
+                }
+            }
+            else
+            {
+                throw new Exception($"Completar los datos requeridos");
+            }
+            return retorno;
         }
         /// <summary>
-        /// Finaliza la cursada de la materia del alumno, poniendole las notas correspondientes, sacando el promedio y otorgando la condicion de Aprobado/Desaprobado.
+        /// Modifica la regularidad de la cursada del alumno recibido, en la materia recibida. Asigna la regularidad recibida por parametro.
         /// </summary>
-        public static bool FinalizarCuatrimestre(int dni, string materia, int notaPrimero, int notaSegundo)
+        public static bool FinalizarCuatrimestre(string nombreUsuario, string nombreMateria, int notaPrimero, int notaSegundo)
         {
+            bool retorno = false;
+            int idAlumno = 0;
+            int idMateria = 0;
             int promedio;
-            Alumno? alumno;
-            MateriaCursada? materiaCursada;
-            Materia? materiaObj;
             try
             {
-                alumno = SysControl.GetAlumnoByDni(dni);
-                materiaCursada = alumno.GetMateriaEnCurso(materia);
-                materiaObj = SysControl.GetMateria(materia);
-                promedio = Funcionalidades.SacarPromedio(notaPrimero, notaSegundo);
-                if(materiaCursada.Estado == eEstadoCursada.Cursando)
+                if (nombreUsuario != "" && nombreMateria != "")
                 {
-                    if (materiaCursada.Regularidad == eRegularidad.Regular)
+                    if ((idAlumno = SysControl.GetAlumnoId(nombreUsuario)) == 0)
                     {
-                        if(materiaCursada.Asistencia == eAsistencia.Presente)
-                        {
-                            if (notaPrimero > 6 && notaSegundo > 6)
-                            {
-                                materiaCursada.Estado = eEstadoCursada.Aprobada;
-                                materiaObj.Alumnos.Remove(alumno);
-                                materiaCursada.NotaPrimerParcial = notaPrimero;
-                                materiaCursada.NotaSegundoParcial = notaSegundo;
-                                materiaCursada.NotaFinal = promedio;
-                                return true;
-                            }
-                            else
-                            {
-                                materiaCursada.Estado = eEstadoCursada.Desaprobada;
-                                materiaObj.Alumnos.Remove(alumno);
-                                materiaCursada.NotaPrimerParcial = notaPrimero;
-                                materiaCursada.NotaSegundoParcial = notaSegundo;
-                                materiaCursada.NotaFinal = promedio;
-                                return false;
-                            }
-                        }
-                        else
-                        {
-                            throw (new Exception("El alumno no asistió a ninguna clase."));
-                        }
+                        throw new Exception($"No se pudo traer el id del alumno");
+                    }
+                    if ((idMateria = SysControl.GetMateriaId(nombreMateria)) == 0)
+                    {
+                        throw new Exception($"No se pudo traer el id de la materia");
+                    }
+                    if (!SysControl.IsAlumnoInMateriaData(idAlumno, idMateria))
+                    {
+                        throw new Exception($"El alumno no está inscripto en esta materia");
+                    }
+                    if(!EsAlumnoRegular(idAlumno, nombreMateria, idMateria)){
+                        throw new Exception($"El alumno no es Alumno Regular");
+                    }
+                    if (!TieneAsistencia(idAlumno, nombreMateria, idMateria))
+                    {
+                        throw new Exception($"El alumno no asistio a las clases");
+                    }
+                    promedio = Funcionalidades.SacarPromedio(notaPrimero, notaSegundo);
+                    _sqlCommand.Parameters.Clear();
+                    _sqlConnection.Open();
+                    _sqlCommand.CommandText = "UPDATE MateriaData SET notaPrimerParcial = @notaPP, notaSegundoParcial = @notaSP, " +
+                                              "promedio = @notaProm, estado = @estado  WHERE idAlumno = @idAlum AND idMateria = @idMat";
+                    _sqlCommand.Parameters.AddWithValue("@notaPP", notaPrimero);
+                    _sqlCommand.Parameters.AddWithValue("@notaSP", notaSegundo);
+                    _sqlCommand.Parameters.AddWithValue("@notaProm", promedio);
+                    if (promedio > 6)
+                    {
+                        _sqlCommand.Parameters.AddWithValue("@estado", eEstadoCursada.Aprobada);
                     }
                     else
                     {
-                        throw (new Exception("El alumno quedó libre, no puede ser evaluado."));
+                        _sqlCommand.Parameters.AddWithValue("@estado", eEstadoCursada.Desaprobada);
                     }
-                } else
+                    _sqlCommand.Parameters.AddWithValue("@idAlum", idAlumno);
+                    _sqlCommand.Parameters.AddWithValue("@idMat", idMateria);
+                    if (_sqlCommand.ExecuteNonQuery() == 0)
+                    {
+                        throw new Exception($"No se pudo realizar la evaluacion");
+                    }
+                    if(promedio > 6)
+                    {
+                        retorno = true;
+                    }
+                    else
+                    {
+                        retorno = false;
+                    }
+                }
+                else
                 {
-                    throw (new Exception("Actualmente no se está cursando esta materia."));
+                    throw new Exception("Por favor, verificar los datos.");
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                throw(new Exception($"{ex.Message}"));
+                throw;
             }
+            finally
+            {
+                _sqlConnection.Close();
+            }
+            return retorno;
         }
         /// <summary>
-        /// Devuelve una lista con los examenes creados para la materia recibida. Los examenes y la materia deben pertenecer al profesor logueado.
+        /// Verifica regularidad
         /// </summary>
-        public List<Examen>? GetExamenesMateria(string nombreMateria)
+        /// <returns>
+        /// True si es regular, False si es libre
+        /// </returns>
+        public static bool EsAlumnoRegular(int idUsuario, string nombreMateria, int idMateria)
         {
-            List<Examen>? examenesList = new();
-            if (nombreMateria != "")
+            int regularidad = 1;
+            bool retorno = false;
+            try
             {
                 if (SysControl.ExistMateria(nombreMateria) == true)
                 {
-                    foreach (Examen examen in _examenes)
+                    _sqlCommand.Parameters.Clear();
+                    _sqlCommand.CommandText = "SELECT regularidad FROM MateriaData WHERE idAlumno = @idAlum AND idMateria = @idMat";
+                    _sqlCommand.Parameters.AddWithValue("@idAlum", idUsuario);
+                    _sqlCommand.Parameters.AddWithValue("@idMat", idMateria);
+                    _sqlConnection.Open();
+
+                    SqlDataReader reader = _sqlCommand.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        if(examen.Materia == nombreMateria)
-                        {
-                            examenesList.Add(examen);
-                        }
+                        regularidad = int.Parse(reader["regularidad"].ToString());
+                    }
+                    if(regularidad == 0)
+                    {
+                        retorno = true;
                     }
                 }
                 else
@@ -168,11 +259,204 @@ namespace Clases
                     throw new Exception("La materia ingresada no existe.");
                 }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (_sqlConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _sqlConnection.Close();
+                }
+            }
+            return retorno;
+        }
+        /// <summary>
+        /// Verifica Asistencia
+        /// </summary>
+        /// <returns>
+        /// True si es regular, False si es libre
+        /// </returns>
+        public static bool TieneAsistencia(int idUsuario, string nombreMateria, int idMateria)
+        {
+            int asistencia = 1;
+            bool retorno = false;
+            try
+            {
+                if (SysControl.ExistMateria(nombreMateria) == true)
+                {
+                    _sqlCommand.Parameters.Clear();
+                    _sqlCommand.CommandText = "SELECT asistencia FROM MateriaData WHERE idAlumno = @idAlum AND idMateria = @idMat";
+                    _sqlCommand.Parameters.AddWithValue("@idAlum", idUsuario);
+                    _sqlCommand.Parameters.AddWithValue("@idMat", idMateria);
+                    _sqlConnection.Open();
+
+                    SqlDataReader reader = _sqlCommand.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        asistencia = int.Parse(reader["asistencia"].ToString());
+                    }
+                    if (asistencia == 0)
+                    {
+                        retorno = true;
+                    }
+                }
+                else
+                {
+                    throw new Exception("La materia ingresada no existe.");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                if (_sqlConnection.State == System.Data.ConnectionState.Open)
+                {
+                    _sqlConnection.Close();
+                }
+            }
+            return retorno;
+        }
+        /// <summary>
+        /// Devuelve una lista con los examenes creados para la materia recibida. Los examenes y la materia deben pertenecer al profesor logueado.
+        /// </summary>
+        public static List<Examen>? GetExamenesMateria(string nombreMateria, string profesor)
+        {
+            List<Examen> examenesList = new();
+            int idProfesor;
+            if (nombreMateria != "")
+            {
+                if (SysControl.ExistMateria(nombreMateria) == true)
+                {
+                    try
+                    {
+                        if ((idProfesor = SysControl.GetProfesorId(profesor)) == 0)
+                        {
+                            throw new Exception($"No se pudo traer el id del profesor");
+                        }
+                        _sqlCommand.Parameters.Clear();
+                        _sqlCommand.CommandText = "SELECT * FROM Examenes WHERE profesorId = @ProfId AND nombreMateria = @nombreMat";
+                        _sqlCommand.Parameters.AddWithValue("@ProfId", idProfesor);
+                        _sqlCommand.Parameters.AddWithValue("@nombreMat", nombreMateria);
+                        _sqlConnection.Open();
+
+                        SqlDataReader reader = _sqlCommand.ExecuteReader();
+
+                        if (!(reader.HasRows))
+                        {
+                            throw new Exception($"La materia seleccionada no tiene examenes");
+                        }
+
+                        while (reader.Read())
+                        {
+                            Examen examen = (Examen)reader;
+
+                            //Console.WriteLine(persona);
+                            examenesList.Add(examen);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        if (_sqlConnection.State == System.Data.ConnectionState.Open)
+                        {
+                            _sqlConnection.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("La materia ingresada no existe.");
+                }
+
+            }
             else
             {
                 throw new Exception("Completar los campos requeridos.");
             }
             return examenesList;
+        }
+        public static List<Alumno>? GetAlumnosMateriaProfesor(string nombreMateria, string nombreProfesor)
+        {
+            List<Alumno> alumnosList = new();
+            int idMateria;
+            int idProfesor;
+            if (nombreMateria != "")
+            {
+                if (SysControl.ExistMateria(nombreMateria) == true)
+                {
+                    try
+                    {
+                        if ((idMateria = SysControl.GetMateriaId(nombreMateria)) == 0)
+                        {
+                            throw new Exception($"No se pudo traer el id de la materia");
+                        }
+                        if ((idProfesor = SysControl.GetProfesorId(nombreProfesor)) == 0)
+                        {
+                            throw new Exception($"No se pudo traer el id del profesor");
+                        }
+                        _sqlCommand.Parameters.Clear();
+                        _sqlCommand.CommandText = "SELECT * FROM Academicos a JOIN MateriaData md ON a.academicoId = md.idAlumno JOIN MateriaProfesor mp ON md.idMateria = mp.idMateriaAsignada WHERE mp.idProfesor = @profId AND md.nombre = @nombreMat";
+                        _sqlCommand.Parameters.AddWithValue("@profId", idProfesor);
+                        _sqlCommand.Parameters.AddWithValue("@nombreMat", nombreMateria);
+                        _sqlConnection.Open();
+
+                        SqlDataReader reader = _sqlCommand.ExecuteReader();
+
+                        if (!(reader.HasRows))
+                        {
+                            throw new Exception($"La materia seleccionada no tiene alumnos");
+                        }
+
+                        while (reader.Read())
+                        {
+                            Alumno alumno = (Alumno)reader;
+
+                            //Console.WriteLine(persona);
+                            alumnosList.Add(alumno);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                        throw;
+                    }
+                    finally
+                    {
+                        if (_sqlConnection.State == System.Data.ConnectionState.Open)
+                        {
+                            _sqlConnection.Close();
+                        }
+                    }
+                }
+                else
+                {
+                    throw new Exception("La materia ingresada no existe.");
+                }
+
+            }
+            else
+            {
+                throw new Exception("Completar los campos requeridos.");
+            }
+            return alumnosList;
+        }
+        public static explicit operator Profesor(SqlDataReader v)
+        {
+            Profesor p = new Profesor
+                (
+                v["usuario"].ToString() ?? "", v["contrasenia"].ToString() ?? "", (eType)v["tipoUsuario"],
+                v["nombre"].ToString() ?? "", v["apellido"].ToString() ?? "", Convert.ToInt32(v["dni"]),
+                (DateTime)v["fechaNacimiento"], (eGenero)v["genero"]
+                );
+
+            return p;
         }
     }
 }

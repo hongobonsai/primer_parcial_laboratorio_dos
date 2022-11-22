@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,6 +17,10 @@ namespace Clases
         private string? _pass;
         private eType _type;
 
+        public Usuario()
+        {
+
+        }
         public Usuario(string? user, string? pass, eType type)
         {
             _user = user;
@@ -30,6 +35,16 @@ namespace Clases
                 retorno = true;
             }
             return retorno;
+        }
+        public string GetPass()
+        {
+            return this._pass;
+        }
+        public static explicit operator Usuario(SqlDataReader v)
+        {
+            Usuario p = new Usuario(v["usuario"].ToString() ?? "", v["contrasenia"].ToString() ?? "", (eType)v["tipoUsuario"]);
+
+            return p;
         }
         public string? User
         {
